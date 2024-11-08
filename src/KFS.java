@@ -1,26 +1,41 @@
 public class KFS extends Kara{
-    private int havaVurusAvantaji ;
-
-    public KFS(int seviyePuani , String sinif, int havaVurusAvantaji){
-        super(seviyePuani,sinif) ;
-        this.havaVurusAvantaji = havaVurusAvantaji ;
-    }
-public int getHavaVurusAvantaji(){
-        return havaVurusAvantaji;
-}
-public void setHavaVurusAvantaji(int havaVurusAvantaji){
-        this.havaVurusAvantaji = havaVurusAvantaji ;
-}
-    @Override
-    public void KartPuaniGoster() {
-        super.KartPuaniGoster();
-        System.out.println("Hava vurus avantaji: " + getHavaVurusAvantaji());  // KFS sınıfına özgü hava vuruş avantajını gösteriyoruz
+    public int havaVurusAvantaji;
+    public KFS(int seviyePuani, String sinif) {
+        super(seviyePuani,sinif);  
     }
 
     @Override
     public void DurumGuncelle(int SaldiriDegeri) {
-
+        super.DurumGuncelle(SaldiriDegeri);
     }
 
+    @Override
+    public void KartPuaniGoster() {
+        super.KartPuaniGoster();
+    }
 
+    @Override
+    public String Sinif() {
+        return super.Sinif();
+    }
+
+    @Override
+    public String altsinif() {
+        return "KFS";
+    }
+
+    @Override
+    public int denizVurusAvantaji() {
+        return 10;
+    }
+
+    @Override
+    public int Dayaniklilik() {
+        return 10;
+    }
+
+    @Override
+    public int Vurus() {
+        return 10;
+    }
 }

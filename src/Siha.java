@@ -1,31 +1,43 @@
-public class Siha extends Hava{
-private int denizVurusAvantaji ;
-    public Siha(int seviyePuani,String sinif, int denizVurusAvantaji){
-        super(seviyePuani,sinif);
-        this.denizVurusAvantaji = denizVurusAvantaji;
-    }
+public class Siha extends Hava {
+    public int denizVurusAvantaji ;
 
-    public int getDenizVurusAvantaji() {
-        return denizVurusAvantaji;
-    }
-
-    public void setDenizVurusAvantaji(int denizVurusAvantaji) {
-        this.denizVurusAvantaji = denizVurusAvantaji;
+    public Siha(int seviyePuani, String sinif) {
+        super(seviyePuani, sinif);
     }
 
     @Override
-    public void KartPuaniGoster(){
-        super.KartPuaniGoster();
-        System.out.println("Bu bir Siha Kartidir");
-        System.out.println("Deniz vurus avantaji degeri : " +denizVurusAvantaji);
-
+    public void DurumGuncelle(int SaldiriDegeri) {
+        super.DurumGuncelle(SaldiriDegeri);
     }
-@Override
-    public void DurumGuncelle(int SaldiriDegeri){
+
+    @Override
+    public void KartPuaniGoster() {
+        super.KartPuaniGoster();
+    }
+
+    @Override
+    public String Sinif() {
+        return super.Sinif();
+    }
+
+    @Override
+    public String altsinif() {
+        return "Siha";
+    }
+
+    @Override
+    public int karaVurusAvantaji() {
+        return 10;
+    }
+
+    @Override
+    public int Dayaniklilik() {
+        return 15;
+    }
+
+    @Override
+    public int Vurus() {
+        return 10;
+    }
 
 }
-
-
-
-}
-
