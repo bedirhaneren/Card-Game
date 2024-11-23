@@ -1,7 +1,22 @@
 public class Obus extends Kara {
-
+    private String name;
     public Obus(int seviyePuani, String sinif) {
         super(seviyePuani,sinif);  
+    }
+
+    // Getter
+    public String getName() {
+        return name;
+    }
+
+    // Setter
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return name; // Kartın ekranda isim olarak görünmesini sağlar
     }
 
     @Override

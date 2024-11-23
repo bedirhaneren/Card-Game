@@ -1,6 +1,24 @@
 public class Firkateyn extends Deniz {
+
+    private String name;
     public Firkateyn(int seviyePuani, String sinif) {
         super(seviyePuani,sinif);  
+    }
+
+    
+    // Getter
+    public String getName() {
+        return name;
+    }
+
+    // Setter
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return name; // Kartın ekranda isim olarak görünmesini sağlar
     }
 
     @Override

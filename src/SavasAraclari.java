@@ -11,9 +11,10 @@ abstract class SavasAraclari {
     }
     public void KartPuaniGoster(){
         System.out.println("Dayaniklilik : " + Dayaniklilik());
-        //System.out.println("Sinif: " + Sinif());
-        //System.out.println("Vurus: " + Vurus());
+        System.out.println("Sinif: " + Sinif());
+        System.out.println("Vurus: " + Vurus());
         System.out.println("Seviye Puani : " + SeviyePuani);
     }
     public abstract void DurumGuncelle(int SaldiriDegeri);
-    }
+        
+}

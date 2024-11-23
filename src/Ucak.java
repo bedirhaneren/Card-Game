@@ -1,7 +1,23 @@
 public class Ucak extends Hava {
 
+    private String name; // Kartın ismi
     public Ucak(int seviyePuani, String sinif) {
         super(seviyePuani, sinif);
+    }
+
+    // Getter
+    public String getName() {
+        return name;
+    }
+
+    // Setter
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return name; // Kartın ekranda isim olarak görünmesini sağlar
     }
 
     @Override
