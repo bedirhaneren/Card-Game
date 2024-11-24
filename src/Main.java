@@ -257,7 +257,7 @@ public class Main {
             }
 
         }
-        System.out.println("\nOyun bitti. Tüm turlar oynandı!");
+        System.out.println("\nOyun bitti. Tüm turlar oynandi!");
     }
     private static Object rastgeleKartEkle(List<Object> kartListesi, Random random, int ucakIndex, int obusIndex, int firkateynIndex) {
         int kartTuru = random.nextInt(3); // 0: Uçak, 1: Obüs, 2: Firkateyn

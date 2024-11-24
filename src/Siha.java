@@ -1,4 +1,4 @@
-/*public class Siha extends Hava {
+public class Siha extends Hava {
     public int denizVurusAvantaji ;
 
     public Siha(int seviyePuani, String sinif) {
@@ -41,4 +41,3 @@
     }
 
 }
-*/
