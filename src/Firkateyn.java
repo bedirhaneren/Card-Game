@@ -6,6 +6,11 @@ public class Firkateyn extends Deniz {
     }
 
     
+    public Firkateyn(String sinif, String name) {
+        super(0, sinif);
+        this.name = name;
+    }
+
     // Getter
     public String getName() {
         return name;

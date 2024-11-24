@@ -4,6 +4,11 @@ public class Obus extends Kara {
         super(0,sinif);  
     }
 
+    public Obus(String sinif, String name) {
+        super(0, sinif);
+        this.name = name;
+    }
+    
     // Getter
     public String getName() {
         return name;

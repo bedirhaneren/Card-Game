@@ -7,6 +7,11 @@ public class Ucak extends Hava {
         super(0, sinif);  // seviyePuani başlangıçta 0 olacak şekilde super'e gönderiyoruz
     }
 
+    public Ucak(String sinif, String name) {
+        super(0, sinif);
+        this.name = name;
+    }
+
     // Getter
     public String getName() {
         return name;
