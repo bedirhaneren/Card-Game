@@ -1,7 +1,7 @@
 public class Obus extends Kara {
     private String name;
-    public Obus(int seviyePuani, String sinif) {
-        super(seviyePuani,sinif);  
+    public Obus( String sinif) {
+        super(0,sinif);  
     }
 
     // Getter
@@ -12,6 +12,15 @@ public class Obus extends Kara {
     // Setter
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getSeviyePuani() {
+        return super.getSeviyePuani();  // Super sınıfındaki getSeviyePuani metodunu çağırıyoruz
+    }
+
+    // Setter for seviyePuani
+    public void setSeviyePuani(int puan) {
+        super.setSeviyePuani(puan);  // Super sınıfındaki setSeviyePuani metodunu çağırıyoruz
     }
 
     @Override
@@ -32,6 +41,16 @@ public class Obus extends Kara {
     @Override
     public int denizVurusAvantaji() {
         return 5;
+    }
+
+    @Override
+    public int karaVurusAvantaji() {
+        return 15; // Kara araçlarına avantaj
+    }
+
+    @Override
+    public int havaVurusAvantaji() {
+        return 0; // Hava araçlarına avantaj yok
     }
 
     @Override

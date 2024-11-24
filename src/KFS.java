@@ -1,4 +1,4 @@
-public class KFS extends Kara{
+/*public class KFS extends Kara{
     public int havaVurusAvantaji;
     public KFS(int seviyePuani, String sinif) {
         super(seviyePuani,sinif);  
@@ -39,3 +39,4 @@ public class KFS extends Kara{
         return 10;
     }
 }
+*/

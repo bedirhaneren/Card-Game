@@ -1,8 +1,10 @@
 public class Ucak extends Hava {
 
     private String name; // Kartın ismi
-    public Ucak(int seviyePuani, String sinif) {
-        super(seviyePuani, sinif);
+
+    // Constructor
+    public Ucak(String sinif) {
+        super(0, sinif);  // seviyePuani başlangıçta 0 olacak şekilde super'e gönderiyoruz
     }
 
     // Getter
@@ -13,6 +15,15 @@ public class Ucak extends Hava {
     // Setter
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getSeviyePuani() {
+        return super.getSeviyePuani();  // Super sınıfındaki getSeviyePuani metodunu çağırıyoruz
+    }
+
+    // Setter for seviyePuani
+    public void setSeviyePuani(int puan) {
+        super.setSeviyePuani(puan);  // Super sınıfındaki setSeviyePuani metodunu çağırıyoruz
     }
 
     @Override
@@ -32,9 +43,18 @@ public class Ucak extends Hava {
 
     @Override
     public int karaVurusAvantaji() {
-        return 10; 
+        return 15; // Kara araçlarına avantaj
     }
 
+    @Override
+    public int denizVurusAvantaji() {
+        return 0; // Deniz araçlarına avantaj yok
+    }
+
+    @Override
+    public int havaVurusAvantaji() {
+        return 0; // Hava araçlarına avantaj yok
+    }
     @Override
     public String Sinif() {
         return super.Sinif();
@@ -54,5 +74,4 @@ public class Ucak extends Hava {
     public void KartPuaniGoster() {
         super.KartPuaniGoster();
     }
-    
-}
+} 

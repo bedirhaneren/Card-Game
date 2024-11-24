@@ -1,4 +1,4 @@
-public class Sida extends Deniz{
+/*public class Sida extends Deniz{
     public int karaVurusAvantaji;
     public Sida(int seviyePuani, String sinif) {
         super(seviyePuani,sinif);  
@@ -33,3 +33,4 @@ public class Sida extends Deniz{
     }
     
 }
+*/

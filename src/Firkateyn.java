@@ -1,8 +1,8 @@
 public class Firkateyn extends Deniz {
 
     private String name;
-    public Firkateyn(int seviyePuani, String sinif) {
-        super(seviyePuani,sinif);  
+    public Firkateyn(String sinif) {
+        super(0,sinif);  
     }
 
     
@@ -14,6 +14,15 @@ public class Firkateyn extends Deniz {
     // Setter
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getSeviyePuani() {
+        return super.getSeviyePuani();  // Super sınıfındaki getSeviyePuani metodunu çağırıyoruz
+    }
+
+    // Setter for seviyePuani
+    public void setSeviyePuani(int puan) {
+        super.setSeviyePuani(puan);  // Super sınıfındaki setSeviyePuani metodunu çağırıyoruz
     }
 
     @Override
@@ -34,6 +43,16 @@ public class Firkateyn extends Deniz {
     @Override
     public int havaVurusAvantaji() {
         return 5;
+    }
+
+    @Override
+    public int karaVurusAvantaji() {
+        return 15; // Kara araçlarına avantaj
+    }
+
+    @Override
+    public int denizVurusAvantaji() {
+        return 0; // Deniz araçlarına avantaj yok
     }
 
     @Override

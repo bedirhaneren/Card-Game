@@ -2,10 +2,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
         Random random = new Random();
+
+        // Kullanıcıdan tur sayısını alıyoruz
+        System.out.print("Kaç tur oynanacak? ");
+        int turSayisi = scanner.nextInt();
 
         // Kart türlerinin sayısını rastgele belirleyelim (toplamda 6 kart olacak şekilde)
         int ucakSayisi = random.nextInt(3) + 1;  // 1 ile 3 arasında rastgele Ucak sayısı
@@ -14,7 +20,6 @@ public class Main {
 
         // Eğer negatif bir sayı çıkarsa (yani 6'dan fazla kart sayısı), yeniden ayarla
         if (firkateynSayisi < 1 || firkateynSayisi > 3) {
-            // Kart sayılarının toplamı her zaman 6 olacak şekilde yeniden ayarla
             obusSayisi = random.nextInt(3) + 1;
             ucakSayisi = random.nextInt(3) + 1;
             firkateynSayisi = 6 - (ucakSayisi + obusSayisi);
@@ -25,17 +30,17 @@ public class Main {
 
         // Sabit sayıdaki Ucak kartlarını ekleyelim
         for (int i = 0; i < ucakSayisi; i++) {
-            tumKartlar.add(new Ucak(50, "Hava"));
+            tumKartlar.add(new Ucak("Hava"));
         }
 
         // Sabit sayıdaki Obus kartlarını ekleyelim
         for (int i = 0; i < obusSayisi; i++) {
-            tumKartlar.add(new Obus(40, "Kara"));
+            tumKartlar.add(new Obus("Kara"));
         }
 
         // Sabit sayıdaki Firkateyn kartlarını ekleyelim
         for (int i = 0; i < firkateynSayisi; i++) {
-            tumKartlar.add(new Firkateyn(30, "Deniz"));
+            tumKartlar.add(new Firkateyn("Deniz"));
         }
 
         // Kartları karıştırma
@@ -54,13 +59,13 @@ public class Main {
 
             // Seçilen karta göre kart ekleme ve isim seti
             if (kartSecimi == 0) {
-                Ucak ucak = new Ucak(50, "Hava");
+                Ucak ucak = new Ucak("Hava");
                 bilgisayarKartlari.add(ucak);
             } else if (kartSecimi == 1) {
-                Obus obus = new Obus(40, "Kara");
+                Obus obus = new Obus("Kara");
                 bilgisayarKartlari.add(obus);
             } else {
-                Firkateyn firkateyn = new Firkateyn(30, "Deniz");
+                Firkateyn firkateyn = new Firkateyn("Deniz");
                 bilgisayarKartlari.add(firkateyn);
             }
         }
@@ -89,34 +94,44 @@ public class Main {
             }
         }
 
-        // **Kullanıcıya atanan 6 kartı yazdırma**
-        Kullanici kullanici = new Kullanici(1, "Kullanıcı", 0);
-        kullanici.kartListesi.addAll(kullaniciKartlari);
-        System.out.println("Kullanıcıya atanan kartlar:");
-        for (Object kart : kullanici.kartListesi) {
-            System.out.print(kart + " "); // Kartın toString metodunu çağırarak yazdırıyoruz
-        }
-        System.out.println();
 
-        // **Bilgisayarın atanan 6 kartını yazdırma**
-        Bilgisayar bilgisayar = new Bilgisayar(2, 0);
-        bilgisayar.kartListesi.addAll(bilgisayarKartlari);
-        System.out.println("Bilgisayarın atanan 6 kartı:");
-        for (Object kart : bilgisayar.kartListesi) {
-            System.out.print(kart + " "); // Kartın toString metodunu çağırarak yazdırıyoruz
-        }
-        System.out.println();
+        // Tur döngüsü
+        for (int tur = 1; tur <= turSayisi; tur++) {
+            System.out.println("\n--- Tur " + tur + " Başlıyor ---");
 
-        // **Bilgisayarın rastgele seçtiği 3 kartı yazdırma**
-        List<Object> bilgisayarSecilenKartlar = bilgisayar.kartSec();
-        System.out.println("Bilgisayarın rastgele seçtiği 3 kart:");
-        for (Object kart : bilgisayarSecilenKartlar) {
-            System.out.print(kart + " "); // Kartın toString metodunu çağırarak yazdırıyoruz
-        }
-        System.out.println();
+            // **Kullanıcıya atanan 6 kartı yazdırma**
+            Kullanici kullanici = new Kullanici(1, "Kullanıcı", 0);
+            kullanici.kartListesi.addAll(kullaniciKartlari);
+            System.out.println("Kullanıcıya atanan kartlar:");
+            for (Object kart : kullanici.kartListesi) {
+                System.out.print(kart + " "); // Kartın toString metodunu çağırarak yazdırıyoruz
+            }
+            System.out.println();
 
-        // Kullanıcı kart seçiyor
-        List<Object> kullaniciSecilenKartlar = kullanici.kartSec();
-        System.out.println("Kullanıcının seçtiği kartlar: " + kullaniciSecilenKartlar);
+            // **Bilgisayarın atanan 6 kartını yazdırma**
+            Bilgisayar bilgisayar = new Bilgisayar(2, 0);
+            bilgisayar.kartListesi.addAll(bilgisayarKartlari);
+            System.out.println("Bilgisayarın atanan 6 kartı:");
+            for (Object kart : bilgisayar.kartListesi) {
+                System.out.print(kart + " "); // Kartın toString metodunu çağırarak yazdırıyoruz
+            }
+            System.out.println();
+
+            // **Bilgisayarın rastgele seçtiği 3 kartı yazdırma**
+            List<Object> bilgisayarSecilenKartlar = bilgisayar.kartSec();
+            System.out.println("Bilgisayarın rastgele seçtiği 3 kart:");
+            for (Object kart : bilgisayarSecilenKartlar) {
+                System.out.print(kart + " "); // Kartın toString metodunu çağırarak yazdırıyoruz
+            }
+            System.out.println();
+
+            // Kullanıcı kart seçiyor
+            List<Object> kullaniciSecilenKartlar = kullanici.kartSec();
+            System.out.println("Kullanıcının seçtiği kartlar: " + kullaniciSecilenKartlar);
+
+            System.out.println("\n--- Tur " + tur + " Bitti ---");
+        }
+
+        System.out.println("\nOyun bitti. Tüm turlar oynandı!");
     }
 }

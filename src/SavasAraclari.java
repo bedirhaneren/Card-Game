@@ -1,20 +1,32 @@
 abstract class SavasAraclari {
 
-    public abstract int Dayaniklilik();
-    public abstract String Sinif();
-    public abstract int Vurus() ;
-    
-    public int SeviyePuani ;
-    
+    protected int SeviyePuani;
+
     public SavasAraclari(int seviyePuani) {
-        this.SeviyePuani=seviyePuani;
+        this.SeviyePuani = seviyePuani;
     }
-    public void KartPuaniGoster(){
-        System.out.println("Dayaniklilik : " + Dayaniklilik());
-        System.out.println("Sinif: " + Sinif());
-        System.out.println("Vurus: " + Vurus());
-        System.out.println("Seviye Puani : " + SeviyePuani);
+
+    public abstract int Dayaniklilik();
+    public abstract int Vurus();
+    public abstract String Sinif(); // "Hava", "Kara", "Deniz"
+
+    public abstract int havaVurusAvantaji();
+    public abstract int karaVurusAvantaji();
+    public abstract int denizVurusAvantaji();
+
+    public void KartPuaniGoster() {
+        System.out.println("Dayanıklılık: " + Dayaniklilik());
+        System.out.println("Vuruş: " + Vurus());
+        System.out.println("Seviye Puanı: " + SeviyePuani);
     }
-    public abstract void DurumGuncelle(int SaldiriDegeri);
-        
+
+    public abstract void DurumGuncelle(int yeniDayaniklilik);
+
+    public int getSeviyePuani() {
+        return SeviyePuani;
+    }
+
+    public void setSeviyePuani(int seviyePuani) {
+        this.SeviyePuani = seviyePuani;
+    }
 }
