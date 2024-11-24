@@ -94,7 +94,6 @@ public class Main {
             }
         }
 
-
         // Tur döngüsü
         for (int tur = 1; tur <= turSayisi; tur++) {
             System.out.println("\n--- Tur " + tur + " Başlıyor ---");
