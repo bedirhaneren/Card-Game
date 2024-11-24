@@ -1,8 +1,10 @@
 public class Firkateyn extends Deniz {
 
     private String name;
+    private int dayaniklilik;
     public Firkateyn(String sinif) {
         super(0,sinif);  
+        this.dayaniklilik=25;
     }
 
     
@@ -46,18 +48,8 @@ public class Firkateyn extends Deniz {
     }
 
     @Override
-    public int karaVurusAvantaji() {
-        return 15; // Kara araçlarına avantaj
-    }
-
-    @Override
-    public int denizVurusAvantaji() {
-        return 0; // Deniz araçlarına avantaj yok
-    }
-
-    @Override
     public int Dayaniklilik() {
-        return 25;
+        return dayaniklilik;
     }
 
     @Override
@@ -74,6 +66,17 @@ public class Firkateyn extends Deniz {
     public void KartPuaniGoster() {
         super.KartPuaniGoster();
     }
+
+
+    public int getDayaniklilik() {
+        return dayaniklilik;
+    }
+
+
+    public void setDayaniklilik(int dayaniklilik) {
+        this.dayaniklilik = dayaniklilik;
+    }
     
+
     
 }

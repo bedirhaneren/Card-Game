@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+
 public class Main {
+    
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
@@ -70,7 +72,6 @@ public class Main {
             }
         }
 
-        // **Kullanıcı kartlarına isim atama**
         int kullaniciUcakIndex = 1, kullaniciObusIndex = 1, kullaniciFirkateynIndex = 1;
         for (Object kart : kullaniciKartlari) {
             if (kart instanceof Ucak) {
@@ -82,7 +83,6 @@ public class Main {
             }
         }
 
-        // **Bilgisayar kartlarına isim atama**
         int bilgisayarUcakIndex = 1, bilgisayarObusIndex = 1, bilgisayarFirkateynIndex = 1;
         for (Object kart : bilgisayarKartlari) {
             if (kart instanceof Ucak) {
@@ -129,8 +129,151 @@ public class Main {
             System.out.println("Kullanıcının seçtiği kartlar: " + kullaniciSecilenKartlar);
 
             System.out.println("\n--- Tur " + tur + " Bitti ---");
-        }
 
+            for (int i = 0; i < kullaniciSecilenKartlar.size(); i++) {
+                Object kullaniciKart = kullaniciSecilenKartlar.get(i);
+                Object bilgisayarKart = bilgisayarSecilenKartlar.get(i);
+            
+                // Kullanıcının kartı Uçak
+                if (kullaniciKart instanceof Ucak) {
+                    Ucak ucak = (Ucak) kullaniciKart;
+            
+                    if (bilgisayarKart instanceof Firkateyn) {
+                        Firkateyn firkateyn = (Firkateyn) bilgisayarKart;
+                        // Kullanıcı saldırıyor
+                        int kullaniciVurus = ucak.Vurus() + ucak.karaVurusAvantaji();
+                        firkateyn.setDayaniklilik(firkateyn.getDayaniklilik() - kullaniciVurus);
+                        // Bilgisayar saldırıyor
+                        int bilgisayarVurus = firkateyn.Vurus() + firkateyn.havaVurusAvantaji();
+                        ucak.setDayaniklilik(ucak.getDayaniklilik() - bilgisayarVurus);
+                    } 
+                    else if (bilgisayarKart instanceof Obus) {
+                        Obus obus = (Obus) bilgisayarKart;
+                        int kullaniciVurus = ucak.Vurus() + ucak.karaVurusAvantaji();
+                        obus.setDayaniklilik(obus.getDayaniklilik() - kullaniciVurus);
+                        int bilgisayarVurus = obus.Vurus() + obus.denizVurusAvantaji();
+                        ucak.setDayaniklilik(ucak.getDayaniklilik() - bilgisayarVurus);
+                    }
+                    else if (bilgisayarKart instanceof Ucak) {
+                        Ucak ucak1 = (Ucak) bilgisayarKart;
+                        int kullaniciVurus = ucak.Vurus() + ucak.karaVurusAvantaji();
+                        ucak.setDayaniklilik(ucak1.getDayaniklilik() - kullaniciVurus);
+                        int bilgisayarVurus = ucak1.Vurus()+ucak1.karaVurusAvantaji();
+                        ucak.setDayaniklilik(ucak.getDayaniklilik() - bilgisayarVurus);
+                    }
+                    // Diğer ihtimaller burada işlenecek
+                }
+            
+                // Kullanıcının kartı Obüs
+                if (kullaniciKart instanceof Obus) {
+                    Obus obus = (Obus) kullaniciKart;
+            
+                    if (bilgisayarKart instanceof Firkateyn) {
+                        Firkateyn firkateyn = (Firkateyn) bilgisayarKart;
+                        int kullaniciVurus = obus.Vurus() + obus.denizVurusAvantaji();
+                        firkateyn.setDayaniklilik(firkateyn.getDayaniklilik() - kullaniciVurus);
+                        int bilgisayarVurus = firkateyn.Vurus() + firkateyn.havaVurusAvantaji();
+                        obus.setDayaniklilik(obus.getDayaniklilik() - bilgisayarVurus);
+                    } 
+                    else if (bilgisayarKart instanceof Ucak) {
+                        Ucak ucak = (Ucak) bilgisayarKart;
+                        int kullaniciVurus = obus.Vurus() + obus.denizVurusAvantaji();
+                        ucak.setDayaniklilik(ucak.getDayaniklilik() - kullaniciVurus);
+                        int bilgisayarVurus = ucak.Vurus()+ucak.karaVurusAvantaji();
+                        obus.setDayaniklilik(obus.getDayaniklilik() - bilgisayarVurus);
+                    }
+                    else if (bilgisayarKart instanceof Obus) {
+                        Obus obus1 = (Obus) bilgisayarKart;
+                        int kullaniciVurus = obus.Vurus() + obus.denizVurusAvantaji();
+                        obus.setDayaniklilik(obus1.getDayaniklilik() - kullaniciVurus);
+                        int bilgisayarVurus = obus1.Vurus() + obus1.denizVurusAvantaji();
+                        obus.setDayaniklilik(obus.getDayaniklilik() - bilgisayarVurus);
+                    }
+                    // Diğer ihtimaller burada işlenecek
+                }
+            
+                // Kullanıcının kartı Firkateyn
+                if (kullaniciKart instanceof Firkateyn) {
+                    Firkateyn firkateyn = (Firkateyn) kullaniciKart;
+            
+                    if (bilgisayarKart instanceof Ucak) {
+                        Ucak ucak = (Ucak) bilgisayarKart;
+                        int kullaniciVurus = firkateyn.Vurus() + firkateyn.havaVurusAvantaji();
+                        ucak.setDayaniklilik(ucak.getDayaniklilik() - kullaniciVurus);
+                        int bilgisayarVurus = ucak.Vurus() + ucak.karaVurusAvantaji();
+                        firkateyn.setDayaniklilik(firkateyn.getDayaniklilik() - bilgisayarVurus);
+                    }
+                    else if (bilgisayarKart instanceof Obus) {
+                        Obus obus = (Obus) bilgisayarKart;
+                        int kullaniciVurus = firkateyn.Vurus()+firkateyn.havaVurusAvantaji();
+                        obus.setDayaniklilik(obus.getDayaniklilik() - kullaniciVurus);
+                        int bilgisayarVurus = obus.Vurus()+obus.denizVurusAvantaji();
+                        firkateyn.setDayaniklilik(firkateyn.getDayaniklilik() - bilgisayarVurus);
+                    }
+                    else if (bilgisayarKart instanceof Firkateyn) {
+                        Firkateyn firkateyn1 = (Firkateyn) bilgisayarKart;
+                        // Kullanıcı saldırıyor
+                        int kullaniciVurus = firkateyn.Vurus() + firkateyn.havaVurusAvantaji();
+                        firkateyn.setDayaniklilik(firkateyn1.getDayaniklilik() - kullaniciVurus);
+                        // Bilgisayar saldırıyor
+                        int bilgisayarVurus = firkateyn1.Vurus() + firkateyn1.havaVurusAvantaji();
+                        firkateyn.setDayaniklilik(firkateyn.getDayaniklilik() - bilgisayarVurus);
+                    }
+                    // Diğer ihtimaller burada işlenecek
+                }
+            
+                // Kartların öldürülmesi işlemleri
+                if (kullaniciKart instanceof Ucak && ((Ucak) kullaniciKart).getDayaniklilik() <= 0) {
+                    System.out.println(((Ucak) kullaniciKart).getName() + " öldü ve kullanıcı kartlarından çıkarılıyor.");
+                    kullaniciKartlari.remove(kullaniciKart);
+                    kullaniciSecilenKartlar.remove(i);
+                    i--;
+                }
+            
+                if (bilgisayarKart instanceof Firkateyn && ((Firkateyn) bilgisayarKart).getDayaniklilik() <= 0) {
+                    System.out.println(((Firkateyn) bilgisayarKart).getName() + " öldü ve bilgisayar kartlarından çıkarılıyor.");
+                    bilgisayarKartlari.remove(bilgisayarKart);
+                    bilgisayarSecilenKartlar.remove(i);
+                    i--;
+                }
+            }
+            
+            Object yeniKullaniciKart = rastgeleKartEkle(kullaniciKartlari, random, kullaniciUcakIndex, kullaniciObusIndex, kullaniciFirkateynIndex);
+            if (yeniKullaniciKart instanceof Ucak) {
+                kullaniciUcakIndex++;
+            } else if (yeniKullaniciKart instanceof Obus) {
+                kullaniciObusIndex++;
+            } else if (yeniKullaniciKart instanceof Firkateyn) {
+                kullaniciFirkateynIndex++;
+            }
+
+            Object yeniBilgisayarKart = rastgeleKartEkle(bilgisayarKartlari, random, bilgisayarUcakIndex, bilgisayarObusIndex, bilgisayarFirkateynIndex);
+            if (yeniBilgisayarKart instanceof Ucak) {
+                bilgisayarUcakIndex++;
+            } else if (yeniBilgisayarKart instanceof Obus) {
+                bilgisayarObusIndex++;
+            } else if (yeniBilgisayarKart instanceof Firkateyn) {
+                bilgisayarFirkateynIndex++;
+            }
+
+        }
         System.out.println("\nOyun bitti. Tüm turlar oynandı!");
     }
+    private static Object rastgeleKartEkle(List<Object> kartListesi, Random random, int ucakIndex, int obusIndex, int firkateynIndex) {
+        int kartTuru = random.nextInt(3); // 0: Uçak, 1: Obüs, 2: Firkateyn
+        Object yeniKart;
+        if (kartTuru == 0) {
+            yeniKart = new Ucak("Hava");
+            ((Ucak) yeniKart).setName("Ucak" + ucakIndex);
+        } else if (kartTuru == 1) {
+            yeniKart = new Obus("Kara");
+            ((Obus) yeniKart).setName("Obus" + obusIndex);
+        } else {
+            yeniKart = new Firkateyn("Deniz");
+            ((Firkateyn) yeniKart).setName("Firkateyn" + firkateynIndex);
+        }
+        kartListesi.add(yeniKart);
+        return yeniKart;
+    }
 }
+    

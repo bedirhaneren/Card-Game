@@ -10,10 +10,6 @@ abstract class SavasAraclari {
     public abstract int Vurus();
     public abstract String Sinif(); // "Hava", "Kara", "Deniz"
 
-    public abstract int havaVurusAvantaji();
-    public abstract int karaVurusAvantaji();
-    public abstract int denizVurusAvantaji();
-
     public void KartPuaniGoster() {
         System.out.println("Dayanıklılık: " + Dayaniklilik());
         System.out.println("Vuruş: " + Vurus());

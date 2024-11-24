@@ -1,7 +1,9 @@
 public class Obus extends Kara {
     private String name;
+    private int dayaniklilik;
     public Obus( String sinif) {
         super(0,sinif);  
+        this.dayaniklilik=20;
     }
 
     // Getter
@@ -42,20 +44,10 @@ public class Obus extends Kara {
     public int denizVurusAvantaji() {
         return 5;
     }
-
-    @Override
-    public int karaVurusAvantaji() {
-        return 15; // Kara araçlarına avantaj
-    }
-
-    @Override
-    public int havaVurusAvantaji() {
-        return 0; // Hava araçlarına avantaj yok
-    }
-
+    
     @Override
     public int Dayaniklilik() {
-        return 20; 
+        return dayaniklilik; 
     }
 
     @Override
@@ -72,6 +64,14 @@ public class Obus extends Kara {
     @Override
     public void DurumGuncelle(int SaldiriDegeri) {
     }
-    
+
+    public int getDayaniklilik() {
+        return dayaniklilik;
+    }
+
+    public void setDayaniklilik(int dayaniklilik) {
+        this.dayaniklilik = dayaniklilik;
+    }
+
 }
 

@@ -1,10 +1,12 @@
 public class Ucak extends Hava {
 
-    private String name; // Kartın ismi
+    private String name;
+    private int dayaniklilik;
 
     // Constructor
     public Ucak(String sinif) {
-        super(0, sinif);  // seviyePuani başlangıçta 0 olacak şekilde super'e gönderiyoruz
+        super(0, sinif); 
+        this.dayaniklilik=20;
     }
 
     // Getter
@@ -33,7 +35,7 @@ public class Ucak extends Hava {
 
     @Override
     public int Dayaniklilik() {
-        return 20; 
+        return dayaniklilik; 
     }
 
     @Override
@@ -43,18 +45,9 @@ public class Ucak extends Hava {
 
     @Override
     public int karaVurusAvantaji() {
-        return 15; // Kara araçlarına avantaj
+        return 10; // Kara araçlarına avantaj
     }
 
-    @Override
-    public int denizVurusAvantaji() {
-        return 0; // Deniz araçlarına avantaj yok
-    }
-
-    @Override
-    public int havaVurusAvantaji() {
-        return 0; // Hava araçlarına avantaj yok
-    }
     @Override
     public String Sinif() {
         return super.Sinif();
@@ -74,4 +67,14 @@ public class Ucak extends Hava {
     public void KartPuaniGoster() {
         super.KartPuaniGoster();
     }
+
+    public int getDayaniklilik() {
+        return dayaniklilik;
+    }
+
+    public void setDayaniklilik(int dayaniklilik) {
+        this.dayaniklilik = dayaniklilik;
+    }
+
+    
 } 
