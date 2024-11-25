@@ -7,7 +7,6 @@ public abstract class Oyuncu {
     protected int skor;
     protected List<Object> kartListesi;
 
-    // Parametresiz Constructor
     public Oyuncu() {
         this.oyuncuID = 0;
         this.oyuncuAdi = "Bilinmiyor";
@@ -15,7 +14,6 @@ public abstract class Oyuncu {
         this.kartListesi = new ArrayList<>();
     }
 
-    // Parametreli Constructor
     public Oyuncu(int oyuncuID, String oyuncuAdi, int skor) {
         this.oyuncuID = oyuncuID;
         this.oyuncuAdi = oyuncuAdi;
@@ -23,11 +21,9 @@ public abstract class Oyuncu {
         this.kartListesi = new ArrayList<>();
     }
 
-    // Skoru gösteren fonksiyon
     public void SkorGoster() {
         System.out.println(oyuncuAdi + " Skoru: " + skor);
     }
 
-    // Kart seçme fonksiyonu (Soyut)
     public abstract List<Object> kartSec();
 }

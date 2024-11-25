@@ -2,7 +2,7 @@ public class Siha extends Hava {
     public int denizVurusAvantaji ;
 
     public Siha(int seviyePuani, String sinif) {
-        super(seviyePuani, sinif);
+        super(0, sinif);
     }
 
     @Override

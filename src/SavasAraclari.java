@@ -3,7 +3,7 @@ abstract class SavasAraclari {
     protected int SeviyePuani;
 
     public SavasAraclari(int seviyePuani) {
-        this.SeviyePuani = seviyePuani;
+        this.SeviyePuani = 0;
     }
 
     public abstract int Dayaniklilik();

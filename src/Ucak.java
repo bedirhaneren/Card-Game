@@ -9,6 +9,11 @@ public class Ucak extends Hava {
         this.dayaniklilik=20;
     }
 
+    public Ucak(String sinif, String name) {
+        super(0, sinif);
+        this.name = name;
+    }
+
     // Getter
     public String getName() {
         return name;
@@ -23,7 +28,6 @@ public class Ucak extends Hava {
         return super.getSeviyePuani();  // Super sınıfındaki getSeviyePuani metodunu çağırıyoruz
     }
 
-    // Setter for seviyePuani
     public void setSeviyePuani(int puan) {
         super.setSeviyePuani(puan);  // Super sınıfındaki setSeviyePuani metodunu çağırıyoruz
     }

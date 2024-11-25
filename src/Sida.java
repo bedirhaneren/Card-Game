@@ -1,7 +1,7 @@
 public class Sida extends Deniz{
     public int karaVurusAvantaji;
     public Sida(int seviyePuani, String sinif) {
-        super(seviyePuani,sinif);  
+        super(0,sinif);  
     }
     @Override
     public void DurumGuncelle(int SaldiriDegeri) {

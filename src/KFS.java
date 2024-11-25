@@ -1,7 +1,7 @@
 public class KFS extends Kara{
     public int havaVurusAvantaji;
     public KFS(int seviyePuani, String sinif) {
-        super(seviyePuani,sinif);  
+        super(0,sinif);  
     }
 
     @Override
