@@ -25,5 +25,13 @@ public abstract class Oyuncu {
         System.out.println(oyuncuAdi + " Skoru: " + skor);
     }
 
+    public int getSkor() {
+        return skor;
+    }
+
+    public void setSkor(int skor) {
+        this.skor = skor;
+    }
+
     public abstract List<Object> kartSec();
 }
