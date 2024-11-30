@@ -2,8 +2,6 @@ public class Ucak extends Hava {
 
     private String name;
     private int dayaniklilik;
-
-    // Constructor
     public Ucak(String sinif) {
         super(0, sinif); 
         this.dayaniklilik=20;
@@ -65,6 +63,7 @@ public class Ucak extends Hava {
     @Override
     public void DurumGuncelle(int SaldiriDegeri) {
         super.DurumGuncelle(SaldiriDegeri);
+        dayaniklilik=dayaniklilik-SaldiriDegeri;        
     }
 
     @Override

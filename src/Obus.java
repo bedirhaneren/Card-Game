@@ -68,6 +68,9 @@ public class Obus extends Kara {
 
     @Override
     public void DurumGuncelle(int SaldiriDegeri) {
+        super.DurumGuncelle(SaldiriDegeri);
+        dayaniklilik=dayaniklilik-SaldiriDegeri;        
+
     }
 
     public int getDayaniklilik() {
@@ -79,4 +82,3 @@ public class Obus extends Kara {
     }
 
 }
-

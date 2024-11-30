@@ -30,6 +30,7 @@ public class Firkateyn extends Deniz {
     // Setter for seviyePuani
     public void setSeviyePuani(int puan) {
         super.setSeviyePuani(puan);  // Super sınıfındaki setSeviyePuani metodunu çağırıyoruz
+        
     }
 
     @Override
@@ -65,6 +66,7 @@ public class Firkateyn extends Deniz {
     @Override
     public void DurumGuncelle(int SaldiriDegeri) {
         super.DurumGuncelle(SaldiriDegeri);
+        dayaniklilik=dayaniklilik-SaldiriDegeri;        
     }
 
     @Override

@@ -8,6 +8,7 @@ public class Kullanici extends Oyuncu {
         super(oyuncuID, oyuncuAdi, skor);
     }
 
+
     @Override
     public List<Object> kartSec() {
         Scanner scanner = new Scanner(System.in);
