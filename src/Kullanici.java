@@ -8,14 +8,12 @@ public class Kullanici extends Oyuncu {
         super(oyuncuID, oyuncuAdi, skor);
     }
 
-
     @Override
     public List<Object> kartSec() {
         Scanner scanner = new Scanner(System.in);
         List<Object> secilenKartlar = new ArrayList<>();
         System.out.println("Kullanıcıya atanan 6 karttan 3 tane seçin (kart isimlerini girin):");
         
-        // Kullanıcıdan 3 kart seçmesini iste
         while (secilenKartlar.size() < 3) {
             String secim = scanner.nextLine();
             boolean bulundu = false;

@@ -1,5 +1,4 @@
 import javafx.application.Application;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -7,9 +6,16 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import java.util.*;
-
-import javafx.scene.Node;
-
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
+import javafx.geometry.Pos;
+import javafx.scene.Node;   
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 
 public class GameUI extends Application {
@@ -32,7 +38,7 @@ public class GameUI extends Application {
 
     private static String rastgeleKartTuru() {
         Random random = new Random();
-        int kartTuru = random.nextInt(3); // 0: Uçak, 1: Obüs, 2: Firkateyn
+        int kartTuru = random.nextInt(3); 
         if (kartTuru == 0) return "Ucak";
         if (kartTuru == 1) return "Obus";
         return "Firkateyn";
@@ -53,7 +59,7 @@ public class GameUI extends Application {
         } else if (kartTuru.equals("Obus")) {
             yeniKart = new Obus("Kara");
             ((Obus) yeniKart).setName("Obus" + (mevcutSayisi + 1));
-        } else { // Firkateyn
+        } else {  
             yeniKart = new Firkateyn("Deniz");
             ((Firkateyn) yeniKart).setName("Firkateyn" + (mevcutSayisi + 1));
         }
@@ -62,61 +68,46 @@ public class GameUI extends Application {
         return yeniKart;
     }
     
-
-   // Giriş ekranı
 private void girişEkranı(Stage primaryStage) {
-    // Arka plan resmi
     BackgroundImage backgroundImage = new BackgroundImage(
         new Image("file:src/images/background.png", 1920, 1080, false, true),
 
             BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
             BackgroundPosition.CENTER,
-            new BackgroundSize(100, 100, true, true, true, true) // Tam ekran için %100 genişlik ve yükseklik
+            new BackgroundSize(100, 100, true, true, true, true)
     );
     Background background = new Background(backgroundImage);
 
-    // Root düzeni
     VBox root = new VBox(20);
     root.setStyle("-fx-alignment: center; -fx-padding: 20px;");
-    root.setBackground(background); // Arka plan ayarla
+    root.setBackground(background); 
 
-   // Resim dosyasını yükle
 Image buttonImage = new Image("file:src/images/buttonimage.png");
 ImageView imageView = new ImageView(buttonImage);
 
-// Resim boyutlarını ayarla (isteğe bağlı)
-imageView.setFitWidth(250); // Resmin genişliği
-imageView.setFitHeight(150); // Resmin yüksekliği
+imageView.setFitWidth(110);
+imageView.setFitHeight(60); 
 
-// Button'u oluştur
 Button oyunaBaslaButton = new Button();
-oyunaBaslaButton.setGraphic(imageView); // Resmi düğmeye ekle
+oyunaBaslaButton.setGraphic(imageView);
 
-// Button stili (isteğe bağlı, düğme metni olmayacağı için sade bir stil)
-oyunaBaslaButton.setStyle("-fx-background-color: transparent;"); // Arka planı transparan yap
-oyunaBaslaButton.setTranslateY(75); // Düğmeyi aşağıya doğru 50 piksel kaydırır
+oyunaBaslaButton.setStyle("-fx-background-color: transparent;"); 
+oyunaBaslaButton.setTranslateY(75);
 
-// Button tıklama eylemi
 oyunaBaslaButton.setOnAction(e -> oyunBaslangicEkrani(primaryStage));
 
-
-    // Resim dosyasını yükle
-Image infoButtonImage = new Image("file:src/images/infobutton.png"); // PNG dosyasının yolu
+Image infoButtonImage = new Image("file:src/images/infobutton.png");
 ImageView infoImageView = new ImageView(infoButtonImage);
 
-// Resmin boyutlarını ayarla (isteğe bağlı)
-infoImageView.setFitWidth(250); // Resmin genişliği
-infoImageView.setFitHeight(150); // Resmin yüksekliği
+infoImageView.setFitWidth(110);
+infoImageView.setFitHeight(60);
 
-// Düğmeyi oluştur ve yalnızca görsel ekle
 Button kartBilgileriButton = new Button();
-kartBilgileriButton.setGraphic(infoImageView); // PNG'yi düğmeye ekle
+kartBilgileriButton.setGraphic(infoImageView);
 
-// Düğmeyi tamamen şeffaf yap
 kartBilgileriButton.setStyle("-fx-background-color: transparent; -fx-padding: 0; -fx-border-width: 0;");
-kartBilgileriButton.setTranslateY(50); // Düğmeyi aşağıya doğru 50 piksel kaydırır
+kartBilgileriButton.setTranslateY(60);
 
-// Düğmeye tıklama işlevi ekle
 kartBilgileriButton.setOnAction(e -> kartBilgileriEkrani(primaryStage));
 
     VBox buttonBox = new VBox(30, oyunaBaslaButton, kartBilgileriButton);
@@ -124,32 +115,25 @@ kartBilgileriButton.setOnAction(e -> kartBilgileriEkrani(primaryStage));
 
     root.getChildren().addAll(buttonBox);
 
-    // Exit için PNG dosyasını yükle
-Image exitButtonImage = new Image("file:src/images/exit.png"); // Exit PNG dosyasının doğru yolunu ver
+Image exitButtonImage = new Image("file:src/images/exit.png");
 ImageView exitImageView = new ImageView(exitButtonImage);
 
-// Resim boyutlarını ayarla (isteğe bağlı)
-exitImageView.setFitWidth(250); // Genişlik
-exitImageView.setFitHeight(150); // Yükseklik
+exitImageView.setFitWidth(110);
+exitImageView.setFitHeight(60); 
 
-// Exit butonunu oluştur
 Button exitButton = new Button();
-exitButton.setGraphic(exitImageView); // PNG'yi düğmeye ekle
+exitButton.setGraphic(exitImageView);
 
-// Düğmeyi tamamen şeffaf yap
 exitButton.setStyle("-fx-background-color: transparent; -fx-padding: 0; -fx-border-width: 0;");
-exitButton.setTranslateY(50); // Düğmeyi aşağıya doğru 50 piksel kaydırır
+exitButton.setTranslateY(50);
 
-// Exit butonuna pencereyi kapatma işlevi ekle
 exitButton.setOnAction(e -> {
-    System.exit(0); // Programı tamamen kapatır
+    System.exit(0); 
 });
 
-// Exit butonunu bir düzen içine ekleme (örneğin, VBox)
 VBox buttonBox2 = new VBox(30, exitButton);
 buttonBox2.setAlignment(Pos.CENTER);
 root.getChildren().addAll(buttonBox2);
-
 
     Scene scene = new Scene(root, 1920, 1080);
     primaryStage.setTitle("Kart Oyunu");
@@ -160,7 +144,6 @@ root.getChildren().addAll(buttonBox2);
 
 
 }
-    // Oyuna başla ekranı
     private void oyunBaslangicEkrani(Stage primaryStage) {
         BackgroundImage backgroundImage = new BackgroundImage(
                 new Image("file:src/images/background.png", 1920, 1080, false, true),
@@ -196,7 +179,10 @@ root.getChildren().addAll(buttonBox2);
                     return;
                 }
         
-                // Kartları oluştur ve oyun ekranına geç
+                if (turSayisi > 5) {
+                    showAlert("Hata", "TUR SAYISI MAKSİMUM 5 OLABILIR!");
+                    return;
+                }
                 baslangicKartlariOlustur();
                 turEkraniniGoster(primaryStage);
             } catch (NumberFormatException ex) {
@@ -217,70 +203,83 @@ root.getChildren().addAll(buttonBox2);
         primaryStage.setFullScreenExitHint("");
     }
 
-    private void turEkraniniGoster(Stage primaryStage) {
-  // Arka plan ve ana düzen için root5
-  BorderPane root = new BorderPane();
 
-  // Arkaplan resmi
+
+    private void dosyayaYaz(String metin) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\Bedirhan Eren\\Desktop\\CardGame\\savasSonuclari.txt", true))) {
+            writer.write(metin);
+            writer.newLine();
+        } catch (IOException e) {
+            System.out.println("Dosyaya yazılırken hata oluştu: " + e.getMessage());
+        }
+    }
+
+
+
+
+    private void turEkraniniGoster(Stage primaryStage) {
+
+        String sonuc1 = "\n\n"+
+        "Tur : " +mevcutTur +  
+                        "\n\n";
+            dosyayaYaz(sonuc1);
+
+            BorderPane root = new BorderPane();
+
   BackgroundImage backgroundImage = new BackgroundImage(
-          new Image("file:src/images/kartsecimbackground.jpg", 1920, 1080, false, true), // Resim yolu
-          BackgroundRepeat.NO_REPEAT,   // Tekrarlanmasın
-          BackgroundRepeat.NO_REPEAT,   // Tekrarlanmasın
-          BackgroundPosition.CENTER,    // Ortalanmış pozisyon
-          new BackgroundSize(100, 100, true, true, false, true) // %100 genişlik ve yükseklik
+          new Image("file:src/images/kartsecimbackground.jpg", 1920, 1080, false, true), 
+          BackgroundRepeat.NO_REPEAT,  
+          BackgroundRepeat.NO_REPEAT, 
+          BackgroundPosition.CENTER,   
+          new BackgroundSize(100, 100, true, true, false, true) 
   );
-  root.setBackground(new Background(backgroundImage)); // Arkaplanı uygula
-    // Bilgisayar kartlarını üst tarafa ekle
+  root.setBackground(new Background(backgroundImage)); 
     HBox bilgisayarKartPane = new HBox(10);
     bilgisayarKartPane.setStyle("-fx-alignment: center;");
     for (Object kart : bilgisayarKartlari) {
-        // Her kart için arka yüz resmi yüklenir
     ImageView arkaYuzImage = new ImageView(new Image("file:src/images/kartback.png"));
-    arkaYuzImage.setFitWidth(150); // Kart genişliği
-    arkaYuzImage.setFitHeight(200); // Kart yüksekliği
+    arkaYuzImage.setFitWidth(100); 
+    arkaYuzImage.setFitHeight(150); 
 
-    // Arka yüzü panele ekle
     bilgisayarKartPane.getChildren().add(arkaYuzImage);
     }
     root.setTop(bilgisayarKartPane);
 
-    // Kullanıcı bilgileri ve seçilen kartlar
-    VBox kullaniciBilgisiBox = new VBox(10);  // kullaniciBilgisiBox burada tanımlandı
+    VBox kullaniciBilgisiBox = new VBox(10);
     secilenKartlarLabel.setText("Seçilen Kartlar: ");
 
     kullaniciBilgisiBox.getChildren().addAll(secilenKartlarLabel, new Label("Tur Geçmişi:"), turGecmisiListesi);
-    turGecmisiListesi.setStyle("-fx-background-color: transparent; -fx-control-inner-background: transparent;"); // Şeffaflık ayarları
+    turGecmisiListesi.setStyle("-fx-background-color: transparent; -fx-control-inner-background: transparent;"); 
 
     root.setCenter(kullaniciBilgisiBox);
 
-    // Kullanıcı kartlarını alt tarafa ekle
     VBox kullaniciKartBox = new VBox(10);
     HBox kartPane = new HBox(10);
     kartPane.setStyle("-fx-alignment: center;");
     for (Object kart : kullaniciKartlari) {
         String imagePath = getImagePath(kart);
         ImageView imageView = new ImageView(new Image(imagePath));
-        imageView.setFitWidth(150);
-        imageView.setFitHeight(200);
+        imageView.setFitWidth(100);
+        imageView.setFitHeight(150);
     VBox kartBox = createCardBox(imageView, kart.toString());
 
         kartBox.setOnMouseClicked(e -> {
             if (secilenKartlar.size() < 3 && !secilenKartlar.contains(kart) && !birOncekiSecilenKartlar.contains(kart)) {
                 secilenKartlar.add(kart);
-                kartBox.setDisable(true); // Kartı devre dışı bırak
-                kartBox.setStyle("-fx-alignment: center; -fx-border-width: 3; -fx-padding: 10; -fx-border-color: red;"); // Seçilen kart kırmızı çerçeve alır
+                kartBox.setDisable(true); 
+                kartBox.setStyle("-fx-alignment: center; -fx-border-width: 3; -fx-padding: 10; -fx-border-color: red;");
                 secilenKartlarLabel.setText("Seçilen Kartlar: " + secilenKartlar);
             } else if (birOncekiSecilenKartlar.contains(kart)) {
                 showAlert("Hata", "Bu kartı bir önceki turda seçtiniz!");
             }
         });
     
-        kartPane.getChildren().add(kartBox); // Kartı kullanıcı alanına ekleyin
+        kartPane.getChildren().add(kartBox); 
     }
     for (Node kartNode : kartPane.getChildren()) {
         if (kartNode instanceof VBox) {
             VBox kartBox = (VBox) kartNode;
-            Label kartLabel = (Label) kartBox.getChildren().get(1); // VBox'taki ikinci öğe kart ismi
+            Label kartLabel = (Label) kartBox.getChildren().get(1); 
             String kartAdi = kartLabel.getText();
             Object kart = kullaniciKartlari.stream()
                 .filter(k -> k.toString().equals(kartAdi))
@@ -288,11 +287,11 @@ root.getChildren().addAll(buttonBox2);
                 .orElse(null);
     
             if (birOncekiSecilenKartlar.contains(kart)) {
-                kartBox.setDisable(true); // Daha önce seçilen kartları devre dışı bırak
-                kartBox.setStyle("-fx-alignment: center; -fx-border-width: 3; -fx-padding: 10; -fx-border-color: red;"); // Kırmızı çerçeve
+                kartBox.setDisable(true);
+                kartBox.setStyle("-fx-alignment: center; -fx-border-width: 3; -fx-padding: 10; -fx-border-color: red;"); 
             } else {
-                kartBox.setDisable(false); // Yeni seçimler için etkinleştir
-                kartBox.setStyle("-fx-alignment: center; -fx-border-width: 3; -fx-padding: 10; -fx-border-color: green;"); // Yeşil çerçeve
+                kartBox.setDisable(false); 
+                kartBox.setStyle("-fx-alignment: center; -fx-border-width: 3; -fx-padding: 10; -fx-border-color: green;"); 
             }
         }
     }
@@ -300,7 +299,6 @@ root.getChildren().addAll(buttonBox2);
     kullaniciKartBox.getChildren().add(kartPane);
     root.setBottom(kullaniciKartBox);
 
-    // "Seçimi Tamamla" butonu
     Button tamamlaButton = new Button("Seçimi Tamamla");
     tamamlaButton.setOnAction(e -> {
         if (secilenKartlar.size() != 3) {
@@ -311,9 +309,8 @@ root.getChildren().addAll(buttonBox2);
     
         Random random = new Random();
     
-        // Bilgisayarın mevcut kart havuzundan rastgele 3 kart seçmesi
-        List<Object> bilgisayarKartHavuzu = new ArrayList<>(bilgisayarKartlari); // Bilgisayarın mevcut kartlarını kopyalayın
-        List<Object> bilgisayarSecilenKartlar = new ArrayList<>(); // Eksik olan tanımlama burada yapıldı
+        List<Object> bilgisayarKartHavuzu = new ArrayList<>(bilgisayarKartlari); 
+        List<Object> bilgisayarSecilenKartlar = new ArrayList<>(); 
         while (bilgisayarSecilenKartlar.size() < 3 && !bilgisayarKartHavuzu.isEmpty()) {
             Object rastgeleKart = bilgisayarKartHavuzu.remove(random.nextInt(bilgisayarKartHavuzu.size()));
             bilgisayarSecilenKartlar.add(rastgeleKart);
@@ -335,7 +332,7 @@ root.getChildren().addAll(buttonBox2);
             Bilgisayar bilgisayar = new Bilgisayar(2, 0);
             bilgisayar.kartListesi.addAll(bilgisayarKartlari);
            
-
+            
         
            
         
@@ -348,7 +345,7 @@ root.getChildren().addAll(buttonBox2);
             
                     if (bilgisayarKart instanceof Firkateyn) {
                         Firkateyn firkateyn = (Firkateyn) bilgisayarKart;
-                        int kullaniciVurus = ucak.Vurus() + ucak.karaVurusAvantaji();
+                        int kullaniciVurus = ucak.Vurus() ;
                         firkateyn.DurumGuncelle(kullaniciVurus);
                         //firkateyn.setDayaniklilik(firkateyn.getDayaniklilik() - kullaniciVurus);
                         if(firkateyn.getDayaniklilik()<=0 && firkateyn.getSeviyePuani()<=10){
@@ -369,6 +366,14 @@ root.getChildren().addAll(buttonBox2);
                         System.out.println("ucak"+ucak.getSeviyePuani() + "firkateyn"+firkateyn.getSeviyePuani()+"\n");
                         kullanici.setSkor(ucak.getSeviyePuani()+kullanici.getSkor());
                         bilgisayar.setSkor(firkateyn.getSeviyePuani()+bilgisayar.getSkor());
+
+                        String sonuc = "Uçak (Kullanıcı): Vuruş gücü: " + kullaniciVurus + 
+                        "\nKalan Dayanıklılık: " + ucak.getDayaniklilik() +
+                        "\nFirkateyn (Bilgisayar): Vuruş gücü: " + bilgisayarVurus + 
+                        "\nKalan Dayanıklılık: " + firkateyn.getDayaniklilik() +
+                        "\n\nUçak Seviye Puanı: " + ucak.getSeviyePuani() +
+                        "\nFirkateyn Seviye Puanı: " + firkateyn.getSeviyePuani();
+                        dosyayaYaz(sonuc);
                     }
                     else if (bilgisayarKart instanceof Obus) {
                         Obus obus = (Obus) bilgisayarKart;
@@ -393,6 +398,14 @@ root.getChildren().addAll(buttonBox2);
                         System.out.println("ucak"+ucak.getSeviyePuani() + "obus"+obus.getSeviyePuani()+"\n");
                         kullanici.setSkor(ucak.getSeviyePuani()+kullanici.getSkor());
                         bilgisayar.setSkor(obus.getSeviyePuani()+bilgisayar.getSkor());
+
+                        String sonuc = "Uçak (Kullanıcı): Vuruş gücü: " + kullaniciVurus + 
+                        "\nKalan Dayanıklılık: " + ucak.getDayaniklilik() +
+                        "\nobus (Bilgisayar): Vuruş gücü: " + bilgisayarVurus + 
+                        "\nKalan Dayanıklılık: " + obus.getDayaniklilik() +
+                        "\n\nUçak Seviye Puanı: " + ucak.getSeviyePuani() +
+                        "\nobus Seviye Puanı: " + obus.getSeviyePuani();
+                        dosyayaYaz(sonuc);
                     }
                     else if (bilgisayarKart instanceof Ucak) {
                         Ucak ucak1 = (Ucak) bilgisayarKart;
@@ -417,6 +430,13 @@ root.getChildren().addAll(buttonBox2);
                         System.out.println("ucak"+ucak.getSeviyePuani() +"ucakpc"+ ucak1.getSeviyePuani()+"\n");
                         kullanici.setSkor(kullanici.getSkor()+ucak.getSeviyePuani()+kullanici.getSkor());
                         bilgisayar.setSkor(ucak1.getSeviyePuani()+bilgisayar.getSkor());
+                        String sonuc = "Uçak (Kullanıcı): Vuruş gücü: " + kullaniciVurus + 
+                        "\nKalan Dayanıklılık: " + ucak.getDayaniklilik() +
+                        "\nucak1 (Bilgisayar): Vuruş gücü: " + bilgisayarVurus + 
+                        "\nKalan Dayanıklılık: " + ucak1.getDayaniklilik() +
+                        "\n\nUçak Seviye Puanı: " + ucak.getSeviyePuani() +
+                        "\nucak1 Seviye Puanı: " + ucak1.getSeviyePuani();
+                        dosyayaYaz(sonuc);
                     }
                     else if (bilgisayarKart instanceof KFS) {
                         KFS Kfs = (KFS) bilgisayarKart;
@@ -441,6 +461,13 @@ root.getChildren().addAll(buttonBox2);
                         System.out.println("ucak"+ucak.getSeviyePuani() + "Kfs"+Kfs.getSeviyePuani()+"\n");
                         kullanici.setSkor(ucak.getSeviyePuani()+kullanici.getSkor());
                         bilgisayar.setSkor(Kfs.getSeviyePuani()+bilgisayar.getSkor());
+                        String sonuc = "Uçak (Kullanıcı): Vuruş gücü: " + kullaniciVurus + 
+                        "\nKalan Dayanıklılık: " + ucak.getDayaniklilik() +
+                        "\nKFS (Bilgisayar): Vuruş gücü: " + bilgisayarVurus + 
+                        "\nKalan Dayanıklılık: " + Kfs.getDayaniklilik() +
+                        "\n\nUçak Seviye Puanı: " + ucak.getSeviyePuani() +
+                        "\nKFS Seviye Puanı: " + Kfs.getSeviyePuani();
+                        dosyayaYaz(sonuc);
                     }
                     else if (bilgisayarKart instanceof Sida) {
                         Sida sida = (Sida) bilgisayarKart;
@@ -465,6 +492,13 @@ root.getChildren().addAll(buttonBox2);
                         System.out.println("ucak"+ucak.getSeviyePuani() + "sida"+sida.getSeviyePuani()+"\n");
                         kullanici.setSkor(ucak.getSeviyePuani()+kullanici.getSkor());
                         bilgisayar.setSkor(sida.getSeviyePuani()+bilgisayar.getSkor());
+                        String sonuc = "Uçak (Kullanıcı): Vuruş gücü: " + kullaniciVurus + 
+                        "\nKalan Dayanıklılık: " + ucak.getDayaniklilik() +
+                        "\nsida (Bilgisayar): Vuruş gücü: " + bilgisayarVurus + 
+                        "\nKalan Dayanıklılık: " + sida.getDayaniklilik() +
+                        "\n\nUçak Seviye Puanı: " + ucak.getSeviyePuani() +
+                        "\nsida Seviye Puanı: " + sida.getSeviyePuani();
+                        dosyayaYaz(sonuc);
                     }
                     else if (bilgisayarKart instanceof Siha) {
                         Siha siha = (Siha) bilgisayarKart;
@@ -489,6 +523,13 @@ root.getChildren().addAll(buttonBox2);
                         System.out.println("ucak"+ucak.getSeviyePuani() + "siha"+siha.getSeviyePuani()+"\n");
                         kullanici.setSkor(ucak.getSeviyePuani()+kullanici.getSkor());
                         bilgisayar.setSkor(siha.getSeviyePuani()+bilgisayar.getSkor());
+                        String sonuc = "Uçak (Kullanıcı): Vuruş gücü: " + kullaniciVurus + 
+                        "\nKalan Dayanıklılık: " + ucak.getDayaniklilik() +
+                        "\nsiha (Bilgisayar): Vuruş gücü: " + bilgisayarVurus + 
+                        "\nKalan Dayanıklılık: " + siha.getDayaniklilik() +
+                        "\n\nUçak Seviye Puanı: " + ucak.getSeviyePuani() +
+                        "\nsiha Seviye Puanı: " + siha.getSeviyePuani();
+                        dosyayaYaz(sonuc);
                     }
                 }
                 if (kullaniciKart instanceof Siha) {
@@ -518,6 +559,13 @@ root.getChildren().addAll(buttonBox2);
                         
                         kullanici.setSkor(siha.getSeviyePuani()+kullanici.getSkor());
                         bilgisayar.setSkor(firkateyn.getSeviyePuani()+bilgisayar.getSkor());
+                        String sonuc = "Siha (Kullanıcı): Vuruş gücü: " + kullaniciVurus + 
+                        "\nKalan Dayanıklılık: " + siha.getDayaniklilik() +
+                        "\nFirkateyn (Bilgisayar): Vuruş gücü: " + bilgisayarVurus + 
+                        "\nKalan Dayanıklılık: " + firkateyn.getDayaniklilik() +
+                        "\n\nsiha Seviye Puanı: " + siha.getSeviyePuani() +
+                        "\nFirkateyn Seviye Puanı: " + firkateyn.getSeviyePuani();
+                        dosyayaYaz(sonuc);
                     } 
                     else if (bilgisayarKart instanceof Obus) {
                         Obus obus = (Obus) bilgisayarKart;
@@ -542,6 +590,13 @@ root.getChildren().addAll(buttonBox2);
                         System.out.println("siha"+siha.getSeviyePuani() + "obus"+obus.getSeviyePuani()+"\n");
                         kullanici.setSkor(siha.getSeviyePuani()+kullanici.getSkor());
                         bilgisayar.setSkor(obus.getSeviyePuani()+bilgisayar.getSkor());
+                        String sonuc = "Siha (Kullanıcı): Vuruş gücü: " + kullaniciVurus + 
+                        "\nKalan Dayanıklılık: " + siha.getDayaniklilik() +
+                        "\nobus (Bilgisayar): Vuruş gücü: " + bilgisayarVurus + 
+                        "\nKalan Dayanıklılık: " + obus.getDayaniklilik() +
+                        "\n\nsiha Seviye Puanı: " + siha.getSeviyePuani() +
+                        "\nobus Seviye Puanı: " + obus.getSeviyePuani();
+                        dosyayaYaz(sonuc);
                     }
                     else if (bilgisayarKart instanceof Ucak) {
                         Ucak ucak1 = (Ucak) bilgisayarKart;
@@ -566,6 +621,13 @@ root.getChildren().addAll(buttonBox2);
                         System.out.println("siha"+siha.getSeviyePuani() +"ucak"+ ucak1.getSeviyePuani()+"\n");
                         kullanici.setSkor(kullanici.getSkor()+siha.getSeviyePuani()+kullanici.getSkor());
                         bilgisayar.setSkor(ucak1.getSeviyePuani()+bilgisayar.getSkor());
+                        String sonuc = "Siha (Kullanıcı): Vuruş gücü: " + kullaniciVurus + 
+                        "\nKalan Dayanıklılık: " + siha.getDayaniklilik() +
+                        "\nucak (Bilgisayar): Vuruş gücü: " + bilgisayarVurus + 
+                        "\nKalan Dayanıklılık: " + ucak1.getDayaniklilik() +
+                        "\n\nsiha Seviye Puanı: " + siha.getSeviyePuani() +
+                        "\nucak Seviye Puanı: " + ucak1.getSeviyePuani();
+                        dosyayaYaz(sonuc);
                     }
                     else if (bilgisayarKart instanceof KFS) {
                         KFS Kfs = (KFS) bilgisayarKart;
@@ -590,6 +652,13 @@ root.getChildren().addAll(buttonBox2);
                         System.out.println("siha"+siha.getSeviyePuani() + "Kfs"+Kfs.getSeviyePuani()+"\n");
                         kullanici.setSkor(siha.getSeviyePuani()+kullanici.getSkor());
                         bilgisayar.setSkor(Kfs.getSeviyePuani()+bilgisayar.getSkor());
+                        String sonuc = "Siha (Kullanıcı): Vuruş gücü: " + kullaniciVurus + 
+                        "\nKalan Dayanıklılık: " + siha.getDayaniklilik() +
+                        "\nKFS (Bilgisayar): Vuruş gücü: " + bilgisayarVurus + 
+                        "\nKalan Dayanıklılık: " + Kfs.getDayaniklilik() +
+                        "\n\nsiha Seviye Puanı: " + siha.getSeviyePuani() +
+                        "\nKFS Seviye Puanı: " + Kfs.getSeviyePuani();
+                        dosyayaYaz(sonuc);
                     }
                     else if (bilgisayarKart instanceof Sida) {
                         Sida sida = (Sida) bilgisayarKart;
@@ -614,6 +683,13 @@ root.getChildren().addAll(buttonBox2);
                         System.out.println("siha"+siha.getSeviyePuani() + "sida"+sida.getSeviyePuani()+"\n");
                         kullanici.setSkor(siha.getSeviyePuani()+kullanici.getSkor());
                         bilgisayar.setSkor(sida.getSeviyePuani()+bilgisayar.getSkor());
+                        String sonuc = "Siha (Kullanıcı): Vuruş gücü: " + kullaniciVurus + 
+                        "\nKalan Dayanıklılık: " + siha.getDayaniklilik() +
+                        "\nsida (Bilgisayar): Vuruş gücü: " + bilgisayarVurus + 
+                        "\nKalan Dayanıklılık: " + sida.getDayaniklilik() +
+                        "\n\nsiha Seviye Puanı: " + siha.getSeviyePuani() +
+                        "\nsida Seviye Puanı: " + sida.getSeviyePuani();
+                        dosyayaYaz(sonuc);
                     }
                     else if (bilgisayarKart instanceof Siha) {
                         Siha siha1 = (Siha) bilgisayarKart;
@@ -638,6 +714,13 @@ root.getChildren().addAll(buttonBox2);
                         System.out.println("siha"+siha.getSeviyePuani() + "siha1"+siha1.getSeviyePuani()+"\n");
                         kullanici.setSkor(siha.getSeviyePuani()+kullanici.getSkor());
                         bilgisayar.setSkor(siha1.getSeviyePuani()+bilgisayar.getSkor());
+                        String sonuc = "Siha (Kullanıcı): Vuruş gücü: " + kullaniciVurus + 
+                        "\nKalan Dayanıklılık: " + siha.getDayaniklilik() +
+                        "\nSiha1 (Bilgisayar): Vuruş gücü: " + bilgisayarVurus + 
+                        "\nKalan Dayanıklılık: " + siha1.getDayaniklilik() +
+                        "\n\nsiha Seviye Puanı: " + siha.getSeviyePuani() +
+                        "\nSiha1 Seviye Puanı: " + siha1.getSeviyePuani();
+                        dosyayaYaz(sonuc);
                     }
                 }
                 if (kullaniciKart instanceof Obus) {
@@ -666,6 +749,13 @@ root.getChildren().addAll(buttonBox2);
                         System.out.println( "obus" + obus.getSeviyePuani() +"firkateyn"+ firkateyn.getSeviyePuani()+"\n");
                         kullanici.setSkor(obus.getSeviyePuani()+kullanici.getSkor());
                         bilgisayar.setSkor(firkateyn.getSeviyePuani()+bilgisayar.getSkor());
+                        String sonuc = "Obus (Kullanıcı): Vuruş gücü: " + kullaniciVurus + 
+                        "\nKalan Dayanıklılık: " + obus.getDayaniklilik() +
+                        "\nFirkateyn (Bilgisayar): Vuruş gücü: " + bilgisayarVurus + 
+                        "\nKalan Dayanıklılık: " + firkateyn.getDayaniklilik() +
+                        "\n\nobus Seviye Puanı: " + obus.getSeviyePuani() +
+                        "\nFirkateyn Seviye Puanı: " + firkateyn.getSeviyePuani();
+                        dosyayaYaz(sonuc);
                     } 
                     else if (bilgisayarKart instanceof Ucak) {
                         Ucak ucak = (Ucak) bilgisayarKart;
@@ -690,6 +780,13 @@ root.getChildren().addAll(buttonBox2);
                         System.out.println("obus"+obus.getSeviyePuani() +"ucak"+ ucak.getSeviyePuani()+"\n");
                         kullanici.setSkor(obus.getSeviyePuani()+kullanici.getSkor());
                         bilgisayar.setSkor(ucak.getSeviyePuani()+bilgisayar.getSkor());
+                        String sonuc = "Obus (Kullanıcı): Vuruş gücü: " + kullaniciVurus + 
+                        "\nKalan Dayanıklılık: " + obus.getDayaniklilik() +
+                        "\nobus (Bilgisayar): Vuruş gücü: " + bilgisayarVurus + 
+                        "\nKalan Dayanıklılık: " + ucak.getDayaniklilik() +
+                        "\n\nobus Seviye Puanı: " + obus.getSeviyePuani() +
+                        "\nobus Seviye Puanı: " + ucak.getSeviyePuani();
+                        dosyayaYaz(sonuc);
                     }
                     else if (bilgisayarKart instanceof Obus) {
                         Obus obus1 = (Obus) bilgisayarKart;
@@ -714,6 +811,13 @@ root.getChildren().addAll(buttonBox2);
                         System.out.println("obus"+ obus.getSeviyePuani() +"obuspc"+ obus1.getSeviyePuani()+"\n");
                         kullanici.setSkor(obus.getSeviyePuani()+kullanici.getSkor());
                         bilgisayar.setSkor(obus1.getSeviyePuani()+bilgisayar.getSkor());
+                        String sonuc = "Obus (Kullanıcı): Vuruş gücü: " + kullaniciVurus + 
+                        "\nKalan Dayanıklılık: " + obus.getDayaniklilik() +
+                        "\nobus1 (Bilgisayar): Vuruş gücü: " + bilgisayarVurus + 
+                        "\nKalan Dayanıklılık: " + obus1.getDayaniklilik() +
+                        "\n\nobus Seviye Puanı: " + obus.getSeviyePuani() +
+                        "\nobus1 Seviye Puanı: " + obus1.getSeviyePuani();
+                        dosyayaYaz(sonuc);
                     }
                     else if (bilgisayarKart instanceof KFS) {
                         KFS Kfs = (KFS) bilgisayarKart;
@@ -738,6 +842,13 @@ root.getChildren().addAll(buttonBox2);
                         System.out.println("obus"+obus.getSeviyePuani() + "Kfs"+Kfs.getSeviyePuani()+"\n");
                         kullanici.setSkor(obus.getSeviyePuani()+kullanici.getSkor());
                         bilgisayar.setSkor(Kfs.getSeviyePuani()+bilgisayar.getSkor());
+                        String sonuc = "Obus (Kullanıcı): Vuruş gücü: " + kullaniciVurus + 
+                        "\nKalan Dayanıklılık: " + obus.getDayaniklilik() +
+                        "\nKFS (Bilgisayar): Vuruş gücü: " + bilgisayarVurus + 
+                        "\nKalan Dayanıklılık: " + Kfs.getDayaniklilik() +
+                        "\n\nobus Seviye Puanı: " + obus.getSeviyePuani() +
+                        "\nKFS Seviye Puanı: " + Kfs.getSeviyePuani();
+                        dosyayaYaz(sonuc);
                     }
                     else if (bilgisayarKart instanceof Sida) {
                         Sida sida = (Sida) bilgisayarKart;
@@ -762,6 +873,13 @@ root.getChildren().addAll(buttonBox2);
                         System.out.println("obus"+obus.getSeviyePuani() + "sida"+sida.getSeviyePuani()+"\n");
                         kullanici.setSkor(obus.getSeviyePuani()+kullanici.getSkor());
                         bilgisayar.setSkor(sida.getSeviyePuani()+bilgisayar.getSkor());
+                        String sonuc = "Obus (Kullanıcı): Vuruş gücü: " + kullaniciVurus + 
+                        "\nKalan Dayanıklılık: " + obus.getDayaniklilik() +
+                        "\nsida (Bilgisayar): Vuruş gücü: " + bilgisayarVurus + 
+                        "\nKalan Dayanıklılık: " + sida.getDayaniklilik() +
+                        "\n\nobus Seviye Puanı: " + obus.getSeviyePuani() +
+                        "\nsida Seviye Puanı: " + sida.getSeviyePuani();
+                        dosyayaYaz(sonuc);
                     }
                     else if (bilgisayarKart instanceof Siha) {
                         Siha siha = (Siha) bilgisayarKart;
@@ -786,6 +904,13 @@ root.getChildren().addAll(buttonBox2);
                         System.out.println("obus"+obus.getSeviyePuani() + "siha"+siha.getSeviyePuani()+"\n");
                         kullanici.setSkor(obus.getSeviyePuani()+kullanici.getSkor());
                         bilgisayar.setSkor(siha.getSeviyePuani()+bilgisayar.getSkor());
+                        String sonuc = "Obus (Kullanıcı): Vuruş gücü: " + kullaniciVurus + 
+                        "\nKalan Dayanıklılık: " + obus.getDayaniklilik() +
+                        "\nsiha (Bilgisayar): Vuruş gücü: " + bilgisayarVurus + 
+                        "\nKalan Dayanıklılık: " + siha.getDayaniklilik() +
+                        "\n\nobus Seviye Puanı: " + obus.getSeviyePuani() +
+                        "\nsiha Seviye Puanı: " + siha.getSeviyePuani();
+                        dosyayaYaz(sonuc);
                     }
                 }
                 if (kullaniciKart instanceof KFS) {
@@ -814,6 +939,13 @@ root.getChildren().addAll(buttonBox2);
                         System.out.println( "kfs" + kfs.getSeviyePuani() +"firkateyn"+ firkateyn.getSeviyePuani()+"\n");
                         kullanici.setSkor(kfs.getSeviyePuani()+kullanici.getSkor());
                         bilgisayar.setSkor(firkateyn.getSeviyePuani()+bilgisayar.getSkor());
+                        String sonuc = "KFS (Kullanıcı): Vuruş gücü: " + kullaniciVurus + 
+                        "\nKalan Dayanıklılık: " + kfs.getDayaniklilik() +
+                        "\nFirkateyn (Bilgisayar): Vuruş gücü: " + bilgisayarVurus + 
+                        "\nKalan Dayanıklılık: " + firkateyn.getDayaniklilik() +
+                        "\n\nKFS Seviye Puanı: " + kfs.getSeviyePuani() +
+                        "\nFirkateyn Seviye Puanı: " + firkateyn.getSeviyePuani();
+                        dosyayaYaz(sonuc);
                     } 
                     else if (bilgisayarKart instanceof Ucak) {
                         Ucak ucak = (Ucak) bilgisayarKart;
@@ -838,6 +970,13 @@ root.getChildren().addAll(buttonBox2);
                         System.out.println("kfs"+kfs.getSeviyePuani() +"ucak"+ ucak.getSeviyePuani()+"\n");
                         kullanici.setSkor(kfs.getSeviyePuani()+kullanici.getSkor());
                         bilgisayar.setSkor(ucak.getSeviyePuani()+bilgisayar.getSkor());
+                        String sonuc = "KFS (Kullanıcı): Vuruş gücü: " + kullaniciVurus + 
+                        "\nKalan Dayanıklılık: " + kfs.getDayaniklilik() +
+                        "\nucak (Bilgisayar): Vuruş gücü: " + bilgisayarVurus + 
+                        "\nKalan Dayanıklılık: " + ucak.getDayaniklilik() +
+                        "\n\nKFS Seviye Puanı: " + kfs.getSeviyePuani() +
+                        "\nucak Seviye Puanı: " + ucak.getSeviyePuani();
+                        dosyayaYaz(sonuc);
                     }
                     else if (bilgisayarKart instanceof Obus) {
                         Obus obus = (Obus) bilgisayarKart;
@@ -862,6 +1001,13 @@ root.getChildren().addAll(buttonBox2);
                         System.out.println("kfs"+ kfs.getSeviyePuani() +"kfs"+ obus.getSeviyePuani()+"\n");
                         kullanici.setSkor(kfs.getSeviyePuani()+kullanici.getSkor());
                         bilgisayar.setSkor(obus.getSeviyePuani()+bilgisayar.getSkor());
+                        String sonuc = "KFS (Kullanıcı): Vuruş gücü: " + kullaniciVurus + 
+                        "\nKalan Dayanıklılık: " + kfs.getDayaniklilik() +
+                        "\nobus (Bilgisayar): Vuruş gücü: " + bilgisayarVurus + 
+                        "\nKalan Dayanıklılık: " + obus.getDayaniklilik() +
+                        "\n\nKFS Seviye Puanı: " + kfs.getSeviyePuani() +
+                        "\nobus Seviye Puanı: " + obus.getSeviyePuani();
+                        dosyayaYaz(sonuc);
                     }
                     else if (bilgisayarKart instanceof KFS) {
                         KFS Kfs1 = (KFS) bilgisayarKart;
@@ -886,6 +1032,13 @@ root.getChildren().addAll(buttonBox2);
                         System.out.println("kfs"+kfs.getSeviyePuani() + "Kfs1"+Kfs1.getSeviyePuani()+"\n");
                         kullanici.setSkor(kfs.getSeviyePuani()+kullanici.getSkor());
                         bilgisayar.setSkor(Kfs1.getSeviyePuani()+bilgisayar.getSkor());
+                        String sonuc = "KFS (Kullanıcı): Vuruş gücü: " + kullaniciVurus + 
+                        "\nKalan Dayanıklılık: " + kfs.getDayaniklilik() +
+                        "\nKFS1 (Bilgisayar): Vuruş gücü: " + bilgisayarVurus + 
+                        "\nKalan Dayanıklılık: " + Kfs1.getDayaniklilik() +
+                        "\n\nKFS Seviye Puanı: " + kfs.getSeviyePuani() +
+                        "\nKFS1 Seviye Puanı: " + Kfs1.getSeviyePuani();
+                        dosyayaYaz(sonuc);
                     }
                     else if (bilgisayarKart instanceof Sida) {
                         Sida sida = (Sida) bilgisayarKart;
@@ -910,6 +1063,13 @@ root.getChildren().addAll(buttonBox2);
                         System.out.println("kfs"+kfs.getSeviyePuani() + "sida"+sida.getSeviyePuani()+"\n");
                         kullanici.setSkor(kfs.getSeviyePuani()+kullanici.getSkor());
                         bilgisayar.setSkor(sida.getSeviyePuani()+bilgisayar.getSkor());
+                        String sonuc = "KFS (Kullanıcı): Vuruş gücü: " + kullaniciVurus + 
+                        "\nKalan Dayanıklılık: " + kfs.getDayaniklilik() +
+                        "\nsida (Bilgisayar): Vuruş gücü: " + bilgisayarVurus + 
+                        "\nKalan Dayanıklılık: " + sida.getDayaniklilik() +
+                        "\n\nKFS Seviye Puanı: " + kfs.getSeviyePuani() +
+                        "\nsida Seviye Puanı: " + sida.getSeviyePuani();
+                        dosyayaYaz(sonuc);
                     }
                     else if (bilgisayarKart instanceof Siha) {
                         Siha siha = (Siha) bilgisayarKart;
@@ -934,6 +1094,13 @@ root.getChildren().addAll(buttonBox2);
                         System.out.println("kfs"+kfs.getSeviyePuani() + "siha"+siha.getSeviyePuani()+"\n");
                         kullanici.setSkor(kfs.getSeviyePuani()+kullanici.getSkor());
                         bilgisayar.setSkor(siha.getSeviyePuani()+bilgisayar.getSkor());
+                        String sonuc = "KFS (Kullanıcı): Vuruş gücü: " + kullaniciVurus + 
+                        "\nKalan Dayanıklılık: " + kfs.getDayaniklilik() +
+                        "\nsiha (Bilgisayar): Vuruş gücü: " + bilgisayarVurus + 
+                        "\nKalan Dayanıklılık: " + siha.getDayaniklilik() +
+                        "\n\nKFS Seviye Puanı: " + kfs.getSeviyePuani() +
+                        "\nsiha Seviye Puanı: " + siha.getSeviyePuani();
+                        dosyayaYaz(sonuc);
                     }
                 }
                 if (kullaniciKart instanceof Firkateyn) {
@@ -962,6 +1129,13 @@ root.getChildren().addAll(buttonBox2);
                         System.out.println("firkateyn" +firkateyn.getSeviyePuani() + "ucak"+ucak.getSeviyePuani()+"\n");
                         kullanici.setSkor(firkateyn.getSeviyePuani()+kullanici.getSkor());
                         bilgisayar.setSkor(ucak.getSeviyePuani()+bilgisayar.getSkor());
+                        String sonuc = "firkateyn (Kullanıcı): Vuruş gücü: " + kullaniciVurus + 
+                        "\nKalan Dayanıklılık: " + firkateyn.getDayaniklilik() +
+                        "\nucak (Bilgisayar): Vuruş gücü: " + bilgisayarVurus + 
+                        "\nKalan Dayanıklılık: " + ucak.getDayaniklilik() +
+                        "\n\nfirkateyn Seviye Puanı: " + firkateyn.getSeviyePuani() +
+                        "\nucak Seviye Puanı: " + ucak.getSeviyePuani();
+                        dosyayaYaz(sonuc);
                     }
                     else if (bilgisayarKart instanceof Obus) {
                         Obus obus = (Obus) bilgisayarKart;
@@ -986,6 +1160,13 @@ root.getChildren().addAll(buttonBox2);
                         System.out.println("firkateyn"+firkateyn.getSeviyePuani() + "obus"+obus.getSeviyePuani()+"\n");
                         kullanici.setSkor(firkateyn.getSeviyePuani()+kullanici.getSkor());
                         bilgisayar.setSkor(obus.getSeviyePuani()+bilgisayar.getSkor());
+                        String sonuc = "firkateyn (Kullanıcı): Vuruş gücü: " + kullaniciVurus + 
+                        "\nKalan Dayanıklılık: " + firkateyn.getDayaniklilik() +
+                        "\nobus (Bilgisayar): Vuruş gücü: " + bilgisayarVurus + 
+                        "\nKalan Dayanıklılık: " + obus.getDayaniklilik() +
+                        "\n\nfirkateyn Seviye Puanı: " + firkateyn.getSeviyePuani() +
+                        "\nobus Seviye Puanı: " + obus.getSeviyePuani();
+                        dosyayaYaz(sonuc);
                     }
                     else if (bilgisayarKart instanceof Firkateyn) {
                         Firkateyn firkateyn1 = (Firkateyn) bilgisayarKart;
@@ -1010,6 +1191,13 @@ root.getChildren().addAll(buttonBox2);
                         System.out.println(" firkateyn"+firkateyn.getSeviyePuani() +"firkateynpc"+ firkateyn1.getSeviyePuani()+"\n");
                         kullanici.setSkor(firkateyn.getSeviyePuani()+kullanici.getSkor());
                         bilgisayar.setSkor(firkateyn1.getSeviyePuani()+bilgisayar.getSkor());
+                        String sonuc = "firkateyn (Kullanıcı): Vuruş gücü: " + kullaniciVurus + 
+                        "\nKalan Dayanıklılık: " + firkateyn.getDayaniklilik() +
+                        "\nfirkateyn1 (Bilgisayar): Vuruş gücü: " + bilgisayarVurus + 
+                        "\nKalan Dayanıklılık: " + firkateyn1.getDayaniklilik() +
+                        "\n\nfirkateyn Seviye Puanı: " + firkateyn.getSeviyePuani() +
+                        "\nfirkateyn1 Seviye Puanı: " + firkateyn1.getSeviyePuani();
+                        dosyayaYaz(sonuc);
                     }
                     else if (bilgisayarKart instanceof KFS) {
                         KFS Kfs = (KFS) bilgisayarKart;
@@ -1034,6 +1222,13 @@ root.getChildren().addAll(buttonBox2);
                         System.out.println("firkateyn"+firkateyn.getSeviyePuani() + "Kfs"+Kfs.getSeviyePuani()+"\n");
                         kullanici.setSkor(firkateyn.getSeviyePuani()+kullanici.getSkor());
                         bilgisayar.setSkor(Kfs.getSeviyePuani()+bilgisayar.getSkor());
+                        String sonuc = "firkateyn (Kullanıcı): Vuruş gücü: " + kullaniciVurus + 
+                        "\nKalan Dayanıklılık: " + firkateyn.getDayaniklilik() +
+                        "\nKFS (Bilgisayar): Vuruş gücü: " + bilgisayarVurus + 
+                        "\nKalan Dayanıklılık: " + Kfs.getDayaniklilik() +
+                        "\n\nfirkateyn Seviye Puanı: " + firkateyn.getSeviyePuani() +
+                        "\nKFS Seviye Puanı: " + Kfs.getSeviyePuani();
+                        dosyayaYaz(sonuc);
                     }
                     else if (bilgisayarKart instanceof Sida) {
                         Sida sida = (Sida) bilgisayarKart;
@@ -1058,6 +1253,13 @@ root.getChildren().addAll(buttonBox2);
                         System.out.println("firkateyn"+firkateyn.getSeviyePuani() + "sida"+sida.getSeviyePuani()+"\n");
                         kullanici.setSkor(firkateyn.getSeviyePuani()+kullanici.getSkor());
                         bilgisayar.setSkor(sida.getSeviyePuani()+bilgisayar.getSkor());
+                        String sonuc = "firkateyn (Kullanıcı): Vuruş gücü: " + kullaniciVurus + 
+                        "\nKalan Dayanıklılık: " + firkateyn.getDayaniklilik() +
+                        "\nsida (Bilgisayar): Vuruş gücü: " + bilgisayarVurus + 
+                        "\nKalan Dayanıklılık: " + sida.getDayaniklilik() +
+                        "\n\nfirkateyn Seviye Puanı: " + firkateyn.getSeviyePuani() +
+                        "\nsida Seviye Puanı: " + sida.getSeviyePuani();
+                        dosyayaYaz(sonuc);
                     }
                     else if (bilgisayarKart instanceof Siha) {
                         Siha siha = (Siha) bilgisayarKart;
@@ -1082,6 +1284,13 @@ root.getChildren().addAll(buttonBox2);
                         System.out.println("firkateyn"+firkateyn.getSeviyePuani() + "siha"+siha.getSeviyePuani()+"\n");
                         kullanici.setSkor(firkateyn.getSeviyePuani()+kullanici.getSkor());
                         bilgisayar.setSkor(siha.getSeviyePuani()+bilgisayar.getSkor());
+                        String sonuc = "firkateyn (Kullanıcı): Vuruş gücü: " + kullaniciVurus + 
+                        "\nKalan Dayanıklılık: " + firkateyn.getDayaniklilik() +
+                        "\nsiha (Bilgisayar): Vuruş gücü: " + bilgisayarVurus + 
+                        "\nKalan Dayanıklılık: " + siha.getDayaniklilik() +
+                        "\n\nfirkateyn Seviye Puanı: " + firkateyn.getSeviyePuani() +
+                        "\nsiha Seviye Puanı: " + siha.getSeviyePuani();
+                        dosyayaYaz(sonuc);
                     }
                 }
                 if (kullaniciKart instanceof Sida) {
@@ -1110,6 +1319,13 @@ root.getChildren().addAll(buttonBox2);
                         System.out.println("sida" +sida.getSeviyePuani() + "ucak"+ucak.getSeviyePuani()+"\n");
                         kullanici.setSkor(sida.getSeviyePuani()+kullanici.getSkor());
                         bilgisayar.setSkor(ucak.getSeviyePuani()+bilgisayar.getSkor());
+                        String sonuc = "sida (Kullanıcı): Vuruş gücü: " + kullaniciVurus + 
+                        "\nKalan Dayanıklılık: " + sida.getDayaniklilik() +
+                        "\nucak (Bilgisayar): Vuruş gücü: " + bilgisayarVurus + 
+                        "\nKalan Dayanıklılık: " + ucak.getDayaniklilik() +
+                        "\n\nsida Seviye Puanı: " + sida.getSeviyePuani() +
+                        "\nucak Seviye Puanı: " + ucak.getSeviyePuani();
+                        dosyayaYaz(sonuc);
                     }
                     else if (bilgisayarKart instanceof Obus) {
                         Obus obus = (Obus) bilgisayarKart;
@@ -1134,6 +1350,13 @@ root.getChildren().addAll(buttonBox2);
                         System.out.println("sida"+sida.getSeviyePuani() + "obus"+obus.getSeviyePuani()+"\n");
                         kullanici.setSkor(sida.getSeviyePuani()+kullanici.getSkor());
                         bilgisayar.setSkor(obus.getSeviyePuani()+bilgisayar.getSkor());
+                        String sonuc = "sida (Kullanıcı): Vuruş gücü: " + kullaniciVurus + 
+                        "\nKalan Dayanıklılık: " + sida.getDayaniklilik() +
+                        "\nobus (Bilgisayar): Vuruş gücü: " + bilgisayarVurus + 
+                        "\nKalan Dayanıklılık: " + obus.getDayaniklilik() +
+                        "\n\nsida Seviye Puanı: " + sida.getSeviyePuani() +
+                        "\nobus Seviye Puanı: " + obus.getSeviyePuani();
+                        dosyayaYaz(sonuc);
                     }
                     else if (bilgisayarKart instanceof Firkateyn) {
                         Firkateyn firkateyn = (Firkateyn) bilgisayarKart;
@@ -1158,6 +1381,13 @@ root.getChildren().addAll(buttonBox2);
                         System.out.println(" sida"+sida.getSeviyePuani() +"firkateyn"+ firkateyn.getSeviyePuani()+"\n");
                         kullanici.setSkor(sida.getSeviyePuani()+kullanici.getSkor());
                         bilgisayar.setSkor(firkateyn.getSeviyePuani()+bilgisayar.getSkor());
+                        String sonuc = "sida (Kullanıcı): Vuruş gücü: " + kullaniciVurus + 
+                        "\nKalan Dayanıklılık: " + sida.getDayaniklilik() +
+                        "\nfirkateyn (Bilgisayar): Vuruş gücü: " + bilgisayarVurus + 
+                        "\nKalan Dayanıklılık: " + firkateyn.getDayaniklilik() +
+                        "\n\nsida Seviye Puanı: " + sida.getSeviyePuani() +
+                        "\nfirkateyn Seviye Puanı: " + firkateyn.getSeviyePuani();
+                        dosyayaYaz(sonuc);
                     }
                     else if (bilgisayarKart instanceof KFS) {
                         KFS Kfs = (KFS) bilgisayarKart;
@@ -1182,6 +1412,13 @@ root.getChildren().addAll(buttonBox2);
                         System.out.println("sida"+sida.getSeviyePuani() + "Kfs"+Kfs.getSeviyePuani()+"\n");
                         kullanici.setSkor(sida.getSeviyePuani()+kullanici.getSkor());
                         bilgisayar.setSkor(Kfs.getSeviyePuani()+bilgisayar.getSkor());
+                        String sonuc = "sida (Kullanıcı): Vuruş gücü: " + kullaniciVurus + 
+                        "\nKalan Dayanıklılık: " + sida.getDayaniklilik() +
+                        "\nKFS (Bilgisayar): Vuruş gücü: " + bilgisayarVurus + 
+                        "\nKalan Dayanıklılık: " + Kfs.getDayaniklilik() +
+                        "\n\nsida Seviye Puanı: " + sida.getSeviyePuani() +
+                        "\nKFS Seviye Puanı: " + Kfs.getSeviyePuani();
+                        dosyayaYaz(sonuc);
                     }
                     else if (bilgisayarKart instanceof Sida) {
                         Sida sida1 = (Sida) bilgisayarKart;
@@ -1206,6 +1443,13 @@ root.getChildren().addAll(buttonBox2);
                         System.out.println("sida"+sida.getSeviyePuani() + "sida1"+sida1.getSeviyePuani()+"\n");
                         kullanici.setSkor(sida.getSeviyePuani()+kullanici.getSkor());
                         bilgisayar.setSkor(sida1.getSeviyePuani()+bilgisayar.getSkor());
+                        String sonuc = "sida (Kullanıcı): Vuruş gücü: " + kullaniciVurus + 
+                        "\nKalan Dayanıklılık: " + sida.getDayaniklilik() +
+                        "\nSida1 (Bilgisayar): Vuruş gücü: " + bilgisayarVurus + 
+                        "\nKalan Dayanıklılık: " + sida1.getDayaniklilik() +
+                        "\n\nsida Seviye Puanı: " + sida.getSeviyePuani() +
+                        "\nSida1 Seviye Puanı: " + sida1.getSeviyePuani();
+                        dosyayaYaz(sonuc);
                     }
                     else if (bilgisayarKart instanceof Siha) {
                         Siha siha = (Siha) bilgisayarKart;
@@ -1230,6 +1474,13 @@ root.getChildren().addAll(buttonBox2);
                         System.out.println("sida"+sida.getSeviyePuani() + "siha"+siha.getSeviyePuani()+"\n");
                         kullanici.setSkor(sida.getSeviyePuani()+kullanici.getSkor());
                         bilgisayar.setSkor(siha.getSeviyePuani()+bilgisayar.getSkor());
+                        String sonuc = "sida (Kullanıcı): Vuruş gücü: " + kullaniciVurus + 
+                        "\nKalan Dayanıklılık: " + sida.getDayaniklilik() +
+                        "\nsiha (Bilgisayar): Vuruş gücü: " + bilgisayarVurus + 
+                        "\nKalan Dayanıklılık: " + siha.getDayaniklilik() +
+                        "\n\nsida Seviye Puanı: " + sida.getSeviyePuani() +
+                        "\nsiha Seviye Puanı: " + siha.getSeviyePuani();
+                        dosyayaYaz(sonuc);
                     }
                 }
 
@@ -1238,24 +1489,36 @@ root.getChildren().addAll(buttonBox2);
                     if (kart instanceof Ucak && ((Ucak) kart).getDayaniklilik() <= 0) {
                         System.out.println(((Ucak) kart).getName() + " öldü ve kullanıcı kartlarından çıkarılıyor.");
                         kullaniciKartlari.remove(k);
+                        String sonuc = "Uçak (Kullanıcı): öldü ve çıkarıldı ";
+                        dosyayaYaz(sonuc);
                     } else if (kart instanceof Obus && ((Obus) kart).getDayaniklilik() <= 0) {
                         System.out.println(((Obus) kart).getName() + " öldü ve kullanıcı kartlarından çıkarılıyor.");
                         kullaniciKartlari.remove(k);
+                        String sonuc = "Obus (Kullanıcı): öldü ve çıkarıldı ";
+                        dosyayaYaz(sonuc);
                     } else if (kart instanceof Firkateyn && ((Firkateyn) kart).getDayaniklilik() <= 0) {
                         System.out.println(((Firkateyn) kart).getName() + " öldü ve kullanıcı kartlarından çıkarılıyor.");
                         kullaniciKartlari.remove(k);
+                        String sonuc = "Firkateyn (Kullanıcı): öldü ve çıkarıldı ";
+                        dosyayaYaz(sonuc);
                     }
                     else if (kart instanceof Sida && ((Sida) kart).getDayaniklilik() <= 0) {
                         System.out.println(((Sida) kart).getName() + " öldü ve kullanıcı kartlarından çıkarılıyor.");
                         kullaniciKartlari.remove(k);
+                        String sonuc = "Sida (Kullanıcı): öldü ve çıkarıldı ";
+                        dosyayaYaz(sonuc);
                     }
                     else if (kart instanceof Siha && ((Siha) kart).getDayaniklilik() <= 0) {
                         System.out.println(((Siha) kart).getName() + " öldü ve kullanıcı kartlarından çıkarılıyor.");
                         kullaniciKartlari.remove(k);
+                        String sonuc = "Siha (Kullanıcı): öldü ve çıkarıldı ";
+                        dosyayaYaz(sonuc);
                     }
                     else if (kart instanceof KFS && ((KFS) kart).getDayaniklilik() <= 0) {
                         System.out.println(((KFS) kart).getName() + " öldü ve kullanıcı kartlarından çıkarılıyor.");
                         kullaniciKartlari.remove(k);
+                        String sonuc = "KFS (Kullanıcı): öldü ve çıkarıldı ";
+                        dosyayaYaz(sonuc);
                     }
                 }
 
@@ -1264,99 +1527,179 @@ root.getChildren().addAll(buttonBox2);
                     if (kart instanceof Ucak && ((Ucak) kart).getDayaniklilik() <= 0) {
                         System.out.println(((Ucak) kart).getName() + " öldü ve bilgisayar kartlarından çıkarılıyor.");
                         bilgisayarKartlari.remove(j);
+                        String sonuc = "Uçak (Bilgisayar): öldü ve çıkarıldı ";
+                        dosyayaYaz(sonuc);
                     } else if (kart instanceof Obus && ((Obus) kart).getDayaniklilik() <= 0) {
                          System.out.println(((Obus) kart).getName() + " öldü ve bilgisayar kartlarından çıkarılıyor.");
                         bilgisayarKartlari.remove(j);
+                        String sonuc = "Obus (Bilgisayar): öldü ve çıkarıldı ";
+                        dosyayaYaz(sonuc);
                     } else if (kart instanceof Firkateyn && ((Firkateyn) kart).getDayaniklilik() <= 0) {
                         System.out.println(((Firkateyn) kart).getName() + " öldü ve bilgisayar kartlarından çıkarılıyor.");
                         bilgisayarKartlari.remove(j);
+                        String sonuc = "Firkateyn (Bilgisayar): öldü ve çıkarıldı ";
+                        dosyayaYaz(sonuc);
                     }else if (kart instanceof Sida && ((Sida) kart).getDayaniklilik() <= 0) {
                         System.out.println(((Sida) kart).getName() + " öldü ve bilgisayar kartlarından çıkarılıyor.");
                         bilgisayarKartlari.remove(j);
+                        String sonuc = "Sida (Bilgisayar): öldü ve çıkarıldı ";
+                        dosyayaYaz(sonuc);
                     }
                     else if (kart instanceof Siha && ((Siha) kart).getDayaniklilik() <= 0) {
                         System.out.println(((Siha) kart).getName() + " öldü ve bilgisayar kartlarından çıkarılıyor.");
                         bilgisayarKartlari.remove(j);
+                        String sonuc = "Siha (Bilgisayar): öldü ve çıkarıldı ";
+                        dosyayaYaz(sonuc);
                     }
                     else if (kart instanceof KFS && ((KFS) kart).getDayaniklilik() <= 0) {
                         System.out.println(((KFS) kart).getName() + " öldü ve bilgisayar kartlarından çıkarılıyor.");
                         bilgisayarKartlari.remove(j);
+                        String sonuc = "KFS (Bilgisayar): öldü ve çıkarıldı ";
+                        dosyayaYaz(sonuc);
                     }
                 }
             }
             
+            int kullanicikazandi = 0;
+            int bilgisayarkazandi = 0;
             if(kullaniciKartlari.isEmpty()){
                 System.out.println("Bilgisayar kazandi..");
+                bilgisayarkazandi++;
             }
             else if(bilgisayarKartlari.isEmpty()){
                 System.out.println("Kullanici kazandi..");
+                kullanicikazandi++;
             }
+
+             
             kullaniciskor = kullanici.getSkor();
             bilgisayarskor = bilgisayar.getSkor();
+            int kullaniciToplamDayaniklilik = kullaniciKartlari.stream()
+            .mapToInt(kart -> {
+                if (kart instanceof Ucak) {
+                    return ((Ucak) kart).getDayaniklilik();
+                } else if (kart instanceof Obus) {
+                    return ((Obus) kart).getDayaniklilik();
+                } else if (kart instanceof Firkateyn) {
+                    return ((Firkateyn) kart).getDayaniklilik();
+                }
+                else if (kart instanceof Sida) {
+                    return ((Sida) kart).getDayaniklilik();
+                }
+                else if (kart instanceof Siha) {
+                    return ((Siha) kart).getDayaniklilik();
+                }
+                else if (kart instanceof KFS) {
+                    return ((KFS) kart).getDayaniklilik();
+                }
+                return 0;
+            })
+            .sum();
+        
+        int bilgisayarToplamDayaniklilik = bilgisayarKartlari.stream()
+            .mapToInt(kart -> {
+                if (kart instanceof Ucak) {
+                    return ((Ucak) kart).getDayaniklilik();
+                } else if (kart instanceof Obus) {
+                    return ((Obus) kart).getDayaniklilik();
+                } else if (kart instanceof Firkateyn) {
+                    return ((Firkateyn) kart).getDayaniklilik();
+                }else if (kart instanceof Sida) {
+                    return ((Sida) kart).getDayaniklilik();
+                }else if (kart instanceof Siha) {
+                    return ((Siha) kart).getDayaniklilik();
+                }else if (kart instanceof KFS) {
+                    return ((KFS) kart).getDayaniklilik();
+                }
+                
+                return 0;
+            })
+            .sum();
+
+            kullanicikazandi = 0;
+            bilgisayarkazandi = 0;
+            if(kullaniciKartlari.isEmpty()){
+                System.out.println("Bilgisayar kazandi..");
+                bilgisayarkazandi++;
+                return;
+            }
+            else if(bilgisayarKartlari.isEmpty()){
+                System.out.println("Kullanici kazandi..");
+                kullanicikazandi++;
+                return;
+            }
+            else if(kullaniciskor < bilgisayarskor){
+                bilgisayarkazandi++;
+            }
+            else if(kullaniciskor > bilgisayarskor){
+                kullanicikazandi++;
+            }
+            else if(kullaniciskor == bilgisayarskor){
+                if(kullaniciToplamDayaniklilik > bilgisayarToplamDayaniklilik){
+                    kullanicikazandi++;
+                }
+                else if(kullaniciToplamDayaniklilik < bilgisayarToplamDayaniklilik){
+                    bilgisayarkazandi++;
+                }
+            }
+            
         
         System.out.println("\nOyun bitti. Tüm turlar oynandı!");    
 
         Object kullaniciYeniKart = sonrastgeleKartEkle(kullaniciKartlari, random, kullaniciUcakIndex, kullaniciObusIndex, kullaniciFirkateynIndex , kullanici.getSkor());
         Object bilgisayarYeniKart = sonrastgeleKartEkle(bilgisayarKartlari, random, bilgisayarUcakIndex, bilgisayarObusIndex, bilgisayarFirkateynIndex , bilgisayar.getSkor());
 
-    
-        // Yeni eklenen kart görselleri
         String kullaniciKartImagePath = getImagePath(kullaniciYeniKart);
         ImageView kullaniciKartImageView = new ImageView(new Image(kullaniciKartImagePath));
-        kullaniciKartImageView.setFitWidth(100);
-        kullaniciKartImageView.setFitHeight(150);
+        kullaniciKartImageView.setFitWidth(75);
+        kullaniciKartImageView.setFitHeight(125);
     
         String bilgisayarKartImagePath = getImagePath(bilgisayarYeniKart);
         ImageView bilgisayarKartImageView = new ImageView(new Image(bilgisayarKartImagePath));
-        bilgisayarKartImageView.setFitWidth(100);
-        bilgisayarKartImageView.setFitHeight(150);
+        bilgisayarKartImageView.setFitWidth(75);
+        bilgisayarKartImageView.setFitHeight(125);
     
-        // Kullanıcı kartlarını göster
         HBox kullaniciKartlarBox = new HBox(10);
         for (Object kart : secilenKartlar) {
             String imagePath = getImagePath(kart);
             ImageView imageView = new ImageView(new Image(imagePath));
-            imageView.setFitWidth(100);
-            imageView.setFitHeight(150);
+            imageView.setFitWidth(75);
+            imageView.setFitHeight(125);
             kullaniciKartlarBox.getChildren().add(imageView);
         }
     
-        // Bilgisayar kartlarını göster
         HBox bilgisayarKartlarBox = new HBox(10);
         for (Object kart : bilgisayarSecilenKartlar) {
             String imagePath = getImagePath(kart);
             ImageView imageView = new ImageView(new Image(imagePath));
-            imageView.setFitWidth(100);
-            imageView.setFitHeight(150);
+            imageView.setFitWidth(75);
+            imageView.setFitHeight(125);
             bilgisayarKartlarBox.getChildren().add(imageView);
         }
     
-        // Yeni eklenen kartların ayrı olarak gösterimi
         VBox kullaniciYeniKartBox = new VBox(5, new Label("Yeni Eklenen Kart:"), kullaniciKartImageView);
         VBox bilgisayarYeniKartBox = new VBox(5, new Label("Yeni Eklenen Kart:"), bilgisayarKartImageView);
     
-     // Kullanıcı ve bilgisayar kartlarını aynı satırda düzenle
         HBox kullaniciKartRow = new HBox();
-        kullaniciKartRow.setSpacing(10); // Kartlar arası boşluk
+        kullaniciKartRow.setSpacing(10);
         Region solBosluk = new Region(); 
-        HBox.setHgrow(solBosluk, Priority.ALWAYS); // Sol boşluğu genişletmek için
-        Region extraSolBosluk = new Region(); // Ekstra bir boşluk daha ekle
+        HBox.setHgrow(solBosluk, Priority.ALWAYS); 
+        Region extraSolBosluk = new Region(); 
         HBox.setHgrow(extraSolBosluk, Priority.ALWAYS);
 
         kullaniciKartRow.getChildren().addAll(extraSolBosluk, kullaniciYeniKartBox, solBosluk, kullaniciKartlarBox);
 
         HBox bilgisayarKartRow = new HBox();
-        bilgisayarKartRow.setSpacing(10); // Kartlar arası boşluk
+        bilgisayarKartRow.setSpacing(10);
         Region sagBosluk = new Region();
-        HBox.setHgrow(sagBosluk, Priority.ALWAYS); // Sağ boşluğu genişletmek için
-        Region extraSagBosluk = new Region(); // Ekstra bir boşluk daha ekle
+        HBox.setHgrow(sagBosluk, Priority.ALWAYS); 
+        Region extraSagBosluk = new Region(); 
         HBox.setHgrow(extraSagBosluk, Priority.ALWAYS);
 
         bilgisayarKartRow.getChildren().addAll(bilgisayarKartlarBox, sagBosluk, extraSagBosluk, bilgisayarYeniKartBox);
 
 
     
-        // Kullanıcı ve bilgisayar kartlarını birleştir
         Label kullaniciKartLabel = new Label("Kullanıcı Kartları:");
         Label bilgisayarKartLabel = new Label("Bilgisayar Kartları:");
     
@@ -1370,17 +1713,15 @@ root.getChildren().addAll(buttonBox2);
         kartlarContainer.setStyle("-fx-alignment: center;");
         turGecmisiListesi.getItems().add(kartlarContainer);
     
-               // Tur ilerlemesi
                birOncekiSecilenKartlar.clear();
                birOncekiSecilenKartlar.addAll(secilenKartlar);
            
-               // Diğer işlemler...
                secilenKartlar.clear();
                secilenKartlarLabel.setText("Seçilen Kartlar: ");
                mevcutTur++;
                if (mevcutTur > turSayisi) {
-                   oyunBittiGoster(kullaniciBilgisiBox);
-               } else {
+                oyunBittiGoster(kullaniciBilgisiBox ,kullanicikazandi ,bilgisayarkazandi );
+            } else {
                    turEkraniniGoster(primaryStage);
                }
            });
@@ -1428,9 +1769,7 @@ private static Object sonrastgeleKartEkle(List<Object> kartListesi, Random rando
 }
 
     
-// Kart bilgileri ekranı
     private void kartBilgileriEkrani(Stage primaryStage) {
-    // Arka plan resmi
     BackgroundImage backgroundImage = new BackgroundImage(
         new Image("file:src/images/kartbackground.png", 1920, 1080, false, true),
         BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
@@ -1440,61 +1779,50 @@ private static Object sonrastgeleKartEkle(List<Object> kartListesi, Random rando
 
     Background background = new Background(backgroundImage);
 
-    // Root düzeni
     VBox root = new VBox(20);
     root.setStyle("-fx-alignment: center; -fx-padding: 20px;");
-    root.setBackground(background); // Arka plan ayarla
+    root.setBackground(background); 
 
-    // Başlık
-    Label infoLabel = new Label("Kart Bilgileri");
+    Label infoLabel = new Label("\n\n\nKart Bilgileri");
     infoLabel.setStyle("-fx-font-size: 24px; -fx-text-fill: white; -fx-padding: 10px;");
 
-    // Kart görsellerini ve isimlerini göstermek için HBox
     HBox kartPane = new HBox(20);
     kartPane.setStyle("-fx-alignment: center;");
 
-    // Kart bilgilerini tanımla
     List<String> kartBilgileri = Arrays.asList(
-            "file:src/images/obus.png,Obüs",
-            "file:src/images/firkateyn.png,Fırkateyn",
-            "file:src/images/ucak.png,Uçak",
-            "file:src/images/siha.png,SİHA",
-            "file:src/images/sida.png,SİDA",
-            "file:src/images/kfs.png,KFS"
+        "file:src/images/obus.png,Obus\nDayaniklilik:25\nVurus:10\nDeniz Vuruş Avantajı: 5",
+        "file:src/images/firkateyn.png,Fırkateyn\nDayaniklilik:20\nVurus:10\nHava Vuruş Avantajı: 5",
+        "file:src/images/ucak.png,Uçak\nDayaniklilik:20\nVurus:10\nKara Vuruş Avantajı: 5",
+        "file:src/images/siha.png,SİHA\nDayaniklilik:15\nVurus:10\nKara Vuruş Avantajı: 5\nDeniz Vuruş Avantajı: 5",
+        "file:src/images/sida.png,SİDA\nDayaniklilik:15\nVurus:10\nHava Vuruş Avantajı: 10\nKara Vuruş Avantajı: 10 ",
+        "file:src/images/kfs.png,KFS\nDayaniklilik:10\nVurus:10\nDeniz Vuruş Avantajı: 10\nHava Vuruş Avantajı: 20"
     );
 
-    // Kartları ekrana yükle
     for (String kartBilgisi : kartBilgileri) {
         String[] bilgiler = kartBilgisi.split(",");
         String imagePath = bilgiler[0];
         String kartIsmi = bilgiler[1];
 
-        // Kart görseli
         ImageView kartImage = new ImageView(new Image(imagePath));
-        kartImage.setFitWidth(150); // Görselin genişliği
-        kartImage.setFitHeight(150); // Görselin yüksekliği
+        kartImage.setFitWidth(150); 
+        kartImage.setFitHeight(150); 
 
-        // Kart ismi
         Label isimLabel = new Label(kartIsmi);
         isimLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: white; -fx-padding: 5px;");
 
-        // Kart görseli ve ismi için VBox
         VBox kartBox = new VBox(5, kartImage, isimLabel);
         kartBox.setStyle("-fx-alignment: center;");
 
-        // Kart kutusunu kartPane'e ekle
         kartPane.getChildren().add(kartBox);
     }
 
-     // Geri butonu
      Button geriButton = new Button("Geri");
      geriButton.setStyle("-fx-font-size: 16px; -fx-background-color: #4CAF50; -fx-text-fill: white;");
      geriButton.setOnAction(e -> {
-         System.out.println("Geri tuşuna basıldı! Giriş ekranına dönülüyor."); // Debug için log mesajı
-         girişEkranı(primaryStage); // Giriş ekranına dön
+         System.out.println("Geri tuşuna basıldı! Giriş ekranına dönülüyor."); 
+         girişEkranı(primaryStage); 
      });
 
-    // Her şeyi root düzenine ekle
     root.getChildren().addAll(infoLabel, kartPane, geriButton);
 
     Scene scene = new Scene(root, 1920, 1080);
@@ -1506,16 +1834,31 @@ private static Object sonrastgeleKartEkle(List<Object> kartListesi, Random rando
 private VBox createCardBox(ImageView imageView, String cardName) {
     VBox cardBox = new VBox(5);
     cardBox.getChildren().addAll(imageView, new Label(cardName));
-    cardBox.setStyle("-fx-alignment: center; -fx-border-width: 3; -fx-padding: 10; -fx-border-color: green;"); // Varsayılan yeşil çerçeve
+    cardBox.setStyle("-fx-alignment: center; -fx-border-width: 3; -fx-padding: 10; -fx-border-color: green;");
     return cardBox;
 }
 
-private void oyunBittiGoster(VBox parent) {
-    parent.getChildren().clear();  // Mevcut içeriği temizle
-    Label oyunBittiLabel = new Label("Oyun Bitti! Tüm turlar oynandı.");  // Oyun bitti mesajı
-    oyunBittiLabel.setStyle("-fx-font-size: 24px; -fx-text-fill: red;");  // Stil ayarları
-    parent.getChildren().add(oyunBittiLabel);  // Mesajı ekle
-}
+private void oyunBittiGoster(VBox parent , int kullanicikazandi , int bilgisayarkazandi) {
+    parent.getChildren().clear();  
+     Label oyunBittiLabel ;
+     if(kullanicikazandi>0){
+         oyunBittiLabel = new Label("\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\tOyun Bitti! Tüm turlar oynandı." + "Kullanici kazandi..");  
+         String sonuc = "\n\nOyun Bitti! Tüm turlar oynandı Kullanici kazandi.." ; 
+                        dosyayaYaz(sonuc);
+     }
+     else if(bilgisayarkazandi>0){
+         oyunBittiLabel = new Label("\n\n\nn\n\n\n\t\t\t\t\t\t\t\t\t\nOyun Bitti! Tüm turlar oynandı." + "Bilgisayar kazandi..");  
+         String sonuc = "\n\nOyun Bitti! Tüm turlar oynandı Bilgisayar kazandi.." ; 
+                        dosyayaYaz(sonuc);
+     }
+     else {
+         oyunBittiLabel = new Label("\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\nOyun Bitti! Tüm turlar oynandı. Berabere!");
+         String sonuc = "\n\nOyun Bitti! Tüm turlar oynandı Berabere Kalındı.." ; 
+                        dosyayaYaz(sonuc);
+     }
+     oyunBittiLabel.setStyle("-fx-font-size: 24px; -fx-text-fill: red;");  
+     parent.getChildren().add(oyunBittiLabel);  
+ }
     private String getImagePath(Object kart) {
         if (kart instanceof Ucak) {
             return "file:src/images/ucak.png";
@@ -1530,28 +1873,23 @@ private void oyunBittiGoster(VBox parent) {
         else if (kart instanceof KFS) {
             return "file:src/images/kfs.png";
         }
-        return "file:src/images/siha.png";  // Varsayılan görsel
+        return "file:src/images/siha.png"; 
     }
-    
     
     private void baslangicKartlariOlustur() {
         Random random = new Random();
     
-        // Kullanıcı kartları
         kullaniciKartlari.clear();
         for (int i = 0; i < 6; i++) {
             rastgeleKartEkle(kullaniciKartlari, rastgeleKartTuru());
         }
     
-        // Bilgisayar kartları
         bilgisayarKartlari.clear();
         for (int i = 0; i < 6; i++) {
             rastgeleKartEkle(bilgisayarKartlari, rastgeleKartTuru());
         }
     }
     
-
-
     private void showAlert(String baslik, String mesaj) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(baslik);
@@ -1562,4 +1900,6 @@ private void oyunBittiGoster(VBox parent) {
 
 
     
+
+
 }

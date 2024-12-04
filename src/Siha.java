@@ -22,7 +22,7 @@ public class Siha extends Hava {
 
     @Override
     public String toString() {
-        return name; // Kartın ekranda isim olarak görünmesini sağlar
+        return name; 
     }
 
     @Override
@@ -71,10 +71,10 @@ public class Siha extends Hava {
     }
     
     public int getSeviyePuani() {
-        return super.getSeviyePuani();  // Super sınıfındaki getSeviyePuani metodunu çağırıyoruz
+        return super.getSeviyePuani();
     }
 
     public void setSeviyePuani(int puan) {
-        super.setSeviyePuani(puan);  // Super sınıfındaki setSeviyePuani metodunu çağırıyoruz
+        super.setSeviyePuani(puan);  
     }
 }

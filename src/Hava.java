@@ -9,7 +9,8 @@ abstract class Hava extends SavasAraclari {
     }
 
     @Override
-    public void DurumGuncelle(int SaldiriDegeri) {
+    public void DurumGuncelle(int yeniDayaniklilik) {
+        
     }
 
     @Override 

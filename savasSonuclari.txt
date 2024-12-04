@@ -1,0 +1,151 @@
+
+
+Tur : 1
+
+
+Obus (Kullanıcı): Vuruş gücü: 10
+Kalan Dayanıklılık: 10
+obus1 (Bilgisayar): Vuruş gücü: 10
+Kalan Dayanıklılık: 10
+
+obus Seviye Puanı: 0
+obus1 Seviye Puanı: 0
+firkateyn (Kullanıcı): Vuruş gücü: 15
+Kalan Dayanıklılık: 15
+ucak (Bilgisayar): Vuruş gücü: 10
+Kalan Dayanıklılık: 5
+
+firkateyn Seviye Puanı: 0
+ucak Seviye Puanı: 0
+Uçak (Kullanıcı): Vuruş gücü: 10
+Kalan Dayanıklılık: 10
+ucak1 (Bilgisayar): Vuruş gücü: 10
+Kalan Dayanıklılık: 10
+
+Uçak Seviye Puanı: 0
+ucak1 Seviye Puanı: 0
+
+
+Tur : 2
+
+
+firkateyn (Kullanıcı): Vuruş gücü: 15
+Kalan Dayanıklılık: 15
+ucak (Bilgisayar): Vuruş gücü: 10
+Kalan Dayanıklılık: -10
+
+firkateyn Seviye Puanı: 10
+ucak Seviye Puanı: 0
+Uçak (Bilgisayar): öldü ve çıkarıldı 
+Uçak (Kullanıcı): Vuruş gücü: 10
+Kalan Dayanıklılık: 10
+ucak1 (Bilgisayar): Vuruş gücü: 10
+Kalan Dayanıklılık: 0
+
+Uçak Seviye Puanı: 10
+ucak1 Seviye Puanı: 0
+Uçak (Bilgisayar): öldü ve çıkarıldı 
+firkateyn (Kullanıcı): Vuruş gücü: 10
+Kalan Dayanıklılık: 15
+firkateyn1 (Bilgisayar): Vuruş gücü: 10
+Kalan Dayanıklılık: 15
+
+firkateyn Seviye Puanı: 0
+firkateyn1 Seviye Puanı: 0
+
+
+Tur : 3
+
+
+firkateyn (Kullanıcı): Vuruş gücü: 10
+Kalan Dayanıklılık: 0
+obus (Bilgisayar): Vuruş gücü: 15
+Kalan Dayanıklılık: 10
+
+firkateyn Seviye Puanı: 0
+obus Seviye Puanı: 10
+Firkateyn (Kullanıcı): öldü ve çıkarıldı 
+Uçak (Kullanıcı): Vuruş gücü: 10
+Kalan Dayanıklılık: 0
+ucak1 (Bilgisayar): Vuruş gücü: 10
+Kalan Dayanıklılık: 10
+
+Uçak Seviye Puanı: 0
+ucak1 Seviye Puanı: 10
+Uçak (Kullanıcı): öldü ve çıkarıldı 
+Obus (Kullanıcı): Vuruş gücü: 10
+Kalan Dayanıklılık: 0
+obus1 (Bilgisayar): Vuruş gücü: 10
+Kalan Dayanıklılık: 10
+
+obus Seviye Puanı: 0
+obus1 Seviye Puanı: 10
+Obus (Kullanıcı): öldü ve çıkarıldı 
+
+
+Tur : 4
+
+
+firkateyn (Kullanıcı): Vuruş gücü: 10
+Kalan Dayanıklılık: 0
+obus (Bilgisayar): Vuruş gücü: 15
+Kalan Dayanıklılık: 10
+
+firkateyn Seviye Puanı: 10
+obus Seviye Puanı: 10
+Firkateyn (Kullanıcı): öldü ve çıkarıldı 
+firkateyn (Kullanıcı): Vuruş gücü: 15
+Kalan Dayanıklılık: 15
+ucak (Bilgisayar): Vuruş gücü: 10
+Kalan Dayanıklılık: -5
+
+firkateyn Seviye Puanı: 10
+ucak Seviye Puanı: 10
+Uçak (Bilgisayar): öldü ve çıkarıldı 
+Siha (Kullanıcı): Vuruş gücü: 20
+Kalan Dayanıklılık: 5
+obus (Bilgisayar): Vuruş gücü: 10
+Kalan Dayanıklılık: -10
+
+siha Seviye Puanı: 10
+obus Seviye Puanı: 10
+Obus (Bilgisayar): öldü ve çıkarıldı 
+
+
+Oyun Bitti! Tüm turlar oynandı Kullanici kazandi..
+
+
+Tur : 1
+
+
+
+
+Tur : 1
+
+
+Obus (Kullanıcı): Vuruş gücü: 10
+Kalan Dayanıklılık: 10
+obus1 (Bilgisayar): Vuruş gücü: 10
+Kalan Dayanıklılık: 10
+
+obus Seviye Puanı: 0
+obus1 Seviye Puanı: 0
+firkateyn (Kullanıcı): Vuruş gücü: 15
+Kalan Dayanıklılık: 15
+ucak (Bilgisayar): Vuruş gücü: 10
+Kalan Dayanıklılık: 5
+
+firkateyn Seviye Puanı: 0
+ucak Seviye Puanı: 0
+Uçak (Kullanıcı): Vuruş gücü: 10
+Kalan Dayanıklılık: 10
+Firkateyn (Bilgisayar): Vuruş gücü: 10
+Kalan Dayanıklılık: 15
+
+Uçak Seviye Puanı: 0
+Firkateyn Seviye Puanı: 0
+
+
+Tur : 2
+
+

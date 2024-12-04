@@ -1,0 +1,56 @@
+Uçak (Kullanıcı): Vuruş gücü: 10
+Kalan Dayanıklılık: 10
+Firkateyn (Bilgisayar): Vuruş gücü: 10
+Kalan Dayanıklılık: 15
+
+Uçak Seviye Puanı: 0
+Firkateyn Seviye Puanı: 0
+Uçak (Kullanıcı): Vuruş gücü: 10
+Kalan Dayanıklılık: 0
+Firkateyn (Bilgisayar): Vuruş gücü: 10
+Kalan Dayanıklılık: 5
+
+Uçak Seviye Puanı: 0
+Firkateyn Seviye Puanı: 10
+Uçak (Kullanıcı): Vuruş gücü: 20
+Kalan Dayanıklılık: 10
+obus (Bilgisayar): Vuruş gücü: 10
+Kalan Dayanıklılık: 0
+
+Uçak Seviye Puanı: 10
+obus Seviye Puanı: 0
+Uçak (Kullanıcı): Vuruş gücü: 20
+Kalan Dayanıklılık: 10
+obus (Bilgisayar): Vuruş gücü: 10
+Kalan Dayanıklılık: 0
+
+Uçak Seviye Puanı: 10
+obus Seviye Puanı: 0
+Uçak (Kullanıcı): Vuruş gücü: 10
+Kalan Dayanıklılık: 10
+Firkateyn (Bilgisayar): Vuruş gücü: 10
+Kalan Dayanıklılık: 15
+
+Uçak Seviye Puanı: 0
+Firkateyn Seviye Puanı: 0
+Uçak (Kullanıcı): Vuruş gücü: 10
+Kalan Dayanıklılık: 10
+Firkateyn (Bilgisayar): Vuruş gücü: 10
+Kalan Dayanıklılık: 5
+
+Uçak Seviye Puanı: 0
+Firkateyn Seviye Puanı: 0
+Uçak (Kullanıcı): Vuruş gücü: 20
+Kalan Dayanıklılık: 10
+obus (Bilgisayar): Vuruş gücü: 10
+Kalan Dayanıklılık: 0
+
+Uçak Seviye Puanı: 10
+obus Seviye Puanı: 0
+Uçak (Kullanıcı): Vuruş gücü: 10
+Kalan Dayanıklılık: 0
+Firkateyn (Bilgisayar): Vuruş gücü: 10
+Kalan Dayanıklılık: 5
+
+Uçak Seviye Puanı: 0
+Firkateyn Seviye Puanı: 10

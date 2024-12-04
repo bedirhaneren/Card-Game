@@ -11,28 +11,26 @@ public class Obus extends Kara {
         this.name = name;
     }
     
-    // Getter
     public String getName() {
         return name;
     }
 
-    // Setter
     public void setName(String name) {
         this.name = name;
     }
 
     public int getSeviyePuani() {
-        return super.getSeviyePuani();  // Super sınıfındaki getSeviyePuani metodunu çağırıyoruz
+        return super.getSeviyePuani();  
     }
 
     // Setter for seviyePuani
     public void setSeviyePuani(int puan) {
-        super.setSeviyePuani(puan);  // Super sınıfındaki setSeviyePuani metodunu çağırıyoruz
+        super.setSeviyePuani(puan);  
     }
 
     @Override
     public String toString() {
-        return name; // Kartın ekranda isim olarak görünmesini sağlar
+        return name; 
     }
 
     @Override
@@ -82,3 +80,4 @@ public class Obus extends Kara {
     }
 
 }
+

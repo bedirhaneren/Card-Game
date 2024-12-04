@@ -2,6 +2,7 @@ public class Ucak extends Hava {
 
     private String name;
     private int dayaniklilik;
+
     public Ucak(String sinif) {
         super(0, sinif); 
         this.dayaniklilik=20;
@@ -12,27 +13,25 @@ public class Ucak extends Hava {
         this.name = name;
     }
 
-    // Getter
     public String getName() {
         return name;
     }
 
-    // Setter
     public void setName(String name) {
         this.name = name;
     }
 
     public int getSeviyePuani() {
-        return super.getSeviyePuani();  // Super sınıfındaki getSeviyePuani metodunu çağırıyoruz
+        return super.getSeviyePuani();  
     }
 
     public void setSeviyePuani(int puan) {
-        super.setSeviyePuani(puan);  // Super sınıfındaki setSeviyePuani metodunu çağırıyoruz
+        super.setSeviyePuani(puan); 
     }
 
     @Override
     public String toString() {
-        return name; // Kartın ekranda isim olarak görünmesini sağlar
+        return name; 
     }
 
     @Override
@@ -47,7 +46,7 @@ public class Ucak extends Hava {
 
     @Override
     public int karaVurusAvantaji() {
-        return 10; // Kara araçlarına avantaj
+        return 10;
     }
 
     @Override
