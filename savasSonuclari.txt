@@ -123,29 +123,3 @@ Tur : 1
 Tur : 1
 
 
-Obus (Kullanıcı): Vuruş gücü: 10
-Kalan Dayanıklılık: 10
-obus1 (Bilgisayar): Vuruş gücü: 10
-Kalan Dayanıklılık: 10
-
-obus Seviye Puanı: 0
-obus1 Seviye Puanı: 0
-firkateyn (Kullanıcı): Vuruş gücü: 15
-Kalan Dayanıklılık: 15
-ucak (Bilgisayar): Vuruş gücü: 10
-Kalan Dayanıklılık: 5
-
-firkateyn Seviye Puanı: 0
-ucak Seviye Puanı: 0
-Uçak (Kullanıcı): Vuruş gücü: 10
-Kalan Dayanıklılık: 10
-Firkateyn (Bilgisayar): Vuruş gücü: 10
-Kalan Dayanıklılık: 15
-
-Uçak Seviye Puanı: 0
-Firkateyn Seviye Puanı: 0
-
-
-Tur : 2
-
-
