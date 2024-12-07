@@ -9,5 +9,5 @@ Cards whose durability is exhausted are removed from the deck. Each card has its
 At the end of the round, each side is given 1 random card. Cards played each round can be viewed from the "Tour History" tab in the middle.When a new round begins, the user is asked to choose cards different from the cards he/she selected in the previous round. When the number of rounds is completed or when either side has no cards left, the game ends and the winner is determined.
 
 ## Sample Images from the Game
-<a href="https://hizliresim.com/vnry45b"><img src="https://i.hizliresim.com/vnry45b.jpg" alt=""></a> 
+<a href="https://hizliresim.com/puhlb02"><img src="https://i.hizliresim.com/puhlb02.jpeg" alt="Resim Yükle"></a>
 <a href="https://hizliresim.com/b7pyv8s"><img src="https://i.hizliresim.com/b7pyv8s.jpg" alt=""></a>
